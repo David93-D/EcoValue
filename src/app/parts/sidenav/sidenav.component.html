@@ -1,0 +1,29 @@
+<div class="sidenav-container" [class.eco-is-mobile]="mobileQuery.matches" *ngIf="shouldRun">
+    <mat-toolbar color="primary" class="ecovalue-toolbar">
+        <button class="boton" mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+        <div class="cont-titulo">
+            <div class="item">
+                <h1 class="titulo letra-Eco">EcoValue</h1>
+            </div>
+            <div class="item">
+                <h2 class="titulo letra-Eco">Invertir es una obligación</h2>
+            </div>
+        </div>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="eco-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav class="list" #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list>
+          <a class="letra-list" mat-list-item [routerLink]="nav.route" *ngFor="let nav of fillerNav">
+            <mat-icon class="icono">{{nav.icon}}</mat-icon>
+            {{nav.name}}
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
