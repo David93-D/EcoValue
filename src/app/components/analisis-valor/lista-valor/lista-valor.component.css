@@ -1,0 +1,19 @@
+th, td {
+    width: 100px;
+    word-wrap: break-word;
+}
+
+.botones {
+    background-color: #b4975a;
+}
+
+.botones:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #b4975a;
+}
+
+.centrar {
+    text-align: center; 
+    vertical-align: middle;
+}

@@ -15,17 +15,17 @@
 }
 
 .cont-titulo {
-    margin-left: 10px;
     display: grid;
     flex-direction: column;
 }
 
-.titulo {
+.ecovalue-app-name {
+    color: goldenrod; 
     font-style: italic;
 }
 
 .boton {
-    border: #3f51b5;
+    border: none;
     background-color: #3f51b5;
 }
 

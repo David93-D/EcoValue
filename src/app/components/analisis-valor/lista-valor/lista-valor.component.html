@@ -1,0 +1,9 @@
+<td class="centrar">{{valor.ticker}}</td>
+    <td class="centrar">{{valor.name}}</td>
+    <td class="centrar">
+        <div>
+            <span class="badge botones" [routerLink]="['/precio-valor', valor.ticker, valor.name, valor.last_updated_utc]">Precio</span>
+            <span class="badge botones m-1" [routerLink]="['/fundamental-valor', valor.ticker, valor.name]">Fundamentales</span>
+            <span class="badge botones" [routerLink]="['/news-valor', valor.ticker, valor.name]">Noticias</span>
+          </div>
+    </td>

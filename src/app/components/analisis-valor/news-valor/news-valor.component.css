@@ -1,0 +1,9 @@
+.paginacion:hover {
+    background-color: black;
+}
+
+.letra-ecovalue {
+    color: #b4975a; 
+    font-family: Georgia, serif; 
+    font-weight: bold;
+}

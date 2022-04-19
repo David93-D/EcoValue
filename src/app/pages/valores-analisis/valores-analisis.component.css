@@ -1,0 +1,35 @@
+.titulo-analisis {
+    font-size: 3em;
+    color: #b4975a; 
+    font-family: Georgia, serif;
+}
+
+.texto-buscador {
+    color: white;
+}
+
+.boton-seccion {
+    font-family: Montserrat;
+    color: #ffffff;
+    background-color: #b4975a;
+    border-color: #b4975a;
+}
+
+.boton-seccion:hover {
+    background-color: black;
+    color: #b4975a;
+}
+
+.letra-ecovalue {
+    color: #b4975a; 
+    font-family: Georgia, serif; 
+    font-weight: bold;
+}
+
+.paginacion {
+    color: white;
+}
+
+.paginacion:hover {
+    background-color: black;
+}
