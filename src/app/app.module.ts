@@ -21,16 +21,27 @@ import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 
-import { ListaValorComponent } from './components/analisis-valor/lista-valor/lista-valor.component';
-
+// COMPONENTES
+// -> ANALISIS-VALOR
+import {ListaValorComponent} from './components/analisis-valor/lista-valor/lista-valor.component';
+import { PrecioValorComponent } from './components/analisis-valor/precio-valor/precio-valor.component';
 
 import { FormsModule } from '@angular/forms';
 import { ApiInterceptorService } from './services/api-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NewsValorComponent } from './components/analisis-valor/news-valor/news-valor.component';
-import { PrecioValorComponent } from './components/analisis-valor/precio-valor/precio-valor.component';
+import { FundamentalValorComponent } from './components/analisis-valor/fundamental-valor/fundamental-valor.component';
+import { BalanceComponent } from './components/analisis-valor/fundamentales-comp/balance/balance.component';
+import { CashFlowComponent } from './components/analisis-valor/fundamentales-comp/cash-flow/cash-flow.component';
+import { IncomeComponent } from './components/analisis-valor/fundamentales-comp/income/income.component';
+
+// -> HOME
 import { BlogComponent } from './components/home/blog/blog.component';
 import { HomeComponent } from './pages/home/home.component';
+
+
+// PIPES
+import { CantidadMonedaPipe } from './pipes/cantidad-moneda.pipe';
 
 @NgModule({
   declarations: [
@@ -42,7 +53,12 @@ import { HomeComponent } from './pages/home/home.component';
     NewsValorComponent,
     PrecioValorComponent,
     BlogComponent,
-    HomeComponent
+    HomeComponent,
+    FundamentalValorComponent,
+    BalanceComponent,
+    CashFlowComponent,
+    IncomeComponent,
+    CantidadMonedaPipe
   ],
   imports: [
     BrowserModule,

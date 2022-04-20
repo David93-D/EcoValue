@@ -5,15 +5,18 @@ th, td {
 
 .botones {
     background-color: #b4975a;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .botones:hover {
     cursor: pointer;
     background-color: #ffffff;
     color: #b4975a;
+    text-shadow: none;
 }
 
 .centrar {
     text-align: center; 
     vertical-align: middle;
+    text-shadow: 0.1em 0.1em 0.2em black;
 }

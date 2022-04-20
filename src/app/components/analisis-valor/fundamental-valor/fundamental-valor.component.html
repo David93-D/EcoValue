@@ -1,0 +1,24 @@
+<div class="container-fluid" style="background-color: #2E4053;">
+    <div class="row text-center p-1">
+        <div class="col-12 col-lg-3">
+            <button class="btn paginacion m-2" style="color: whitesmoke;" (click)="volver()"><mat-icon class="icono">arrow_back</mat-icon> Volver a la lista de valores</button>
+        </div>
+        <div class="col-12 col-lg-9">
+            <h1 class="letra-ecovalue">{{valor_nombre}}</h1>
+            <p class="letra-ecovalue">* En millones de $/€</p>
+        </div>
+    </div>
+    <app-balance
+        [balance]="items_balance"
+        [income]="items_income"
+        [anyos]="array_anyos"
+    ></app-balance>
+    <app-income
+        [income]="items_income"
+        [anyos]="array_anyos"
+    ></app-income>
+    <app-cash-flow
+        [cashFlow]="items_cashFlow"
+        [anyos]="array_anyos"
+    ></app-cash-flow>
+</div>

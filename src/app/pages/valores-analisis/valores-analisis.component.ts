@@ -9,6 +9,8 @@ import { DataValoresService } from 'src/app/services/data-valores.service';
 })
 export class ValoresAnalisisComponent implements OnInit {
 
+  conceptos: string[] = ["Ticker", "Empresa", "Ver"];
+
   valores: IInfoValor[] = [];
 
   valorBuscar = "";

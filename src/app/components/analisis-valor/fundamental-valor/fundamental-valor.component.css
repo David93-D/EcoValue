@@ -1,0 +1,13 @@
+.letra-ecovalue {
+    color: #b4975a; 
+    font-family: Georgia, serif; 
+    font-weight: bold;
+}
+
+.paginacion {
+    color: white;
+}
+
+.paginacion:hover {
+    background-color: black;
+}
