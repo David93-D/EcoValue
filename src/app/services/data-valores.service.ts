@@ -14,12 +14,15 @@ export class DataValoresService {
 
   arrayURL = [
     "https://api.polygon.io/v3/reference/tickers?active=true&sort=ticker&order=asc&limit=10"
-   ]
+  ]
 
   constructor(private http: HttpClient) { }
 
   getAllStocks() {
-    let allStocksURL = this.arrayURL[this.arrayURL.length-1]; // OBTENEMOS LA ULTIMA POSICÍON
+    let allStocksURL = "";
+
+    allStocksURL = this.arrayURL[this.arrayURL.length-1]; // OBTENEMOS LA ULTIMA POSICÍON
+  
     this.http.get<any>(allStocksURL).pipe(map(datos => {
       this.arrayURL.push(datos.next_url);
       return datos.results;
@@ -66,7 +69,7 @@ export class DataValoresService {
     let stocks_buscar = `https://api.polygon.io/v3/reference/tickers?search=${stringBuscar}&active=true&sort=ticker&order=asc&limit=10`;
     return this.http.get<any>(stocks_buscar).pipe(map(datos => {
       return datos.results;
-    }))
+    })).subscribe(values => this.valoresSubject.next(values))
   }
   
 }

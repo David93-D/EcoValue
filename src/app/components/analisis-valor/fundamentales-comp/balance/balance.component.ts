@@ -9,7 +9,7 @@ import { IIncome } from 'src/app/interfaces/i-income';
 })
 export class BalanceComponent implements OnInit {
 
-  @Input() balance!: IBalance[]; 
+  @Input() balance!: (IBalance|null)[]; 
   @Input() income!: IIncome[];
   @Input() anyos!: number[];
 

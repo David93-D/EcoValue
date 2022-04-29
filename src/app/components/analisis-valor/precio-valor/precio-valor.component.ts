@@ -29,14 +29,12 @@ export class PrecioValorComponent implements OnInit {
   ngOnInit(): void {
     this.chart = document.getElementById("grafico_precios");
     Chart.register(...registerables);
-    this.loadChart();
+    let grafico_precio = this.loadChart();
     this.obtenerMeses();
     this._route.params.subscribe(p => {
       const ultima_fecha = this.getUltimaFecha(p['last_updated_utc']);
-      //console.log("Ultima fecha: " + ultima_fecha);
       
       const inicio_fecha = this.getInicioFecha(ultima_fecha);
-      //console.log("Inicio fecha: " + inicio_fecha);
       
       let ticker = p['ticker'];
       this.dataValores.getDatosPrecio(ticker,inicio_fecha, ultima_fecha).subscribe(response => {
@@ -45,13 +43,14 @@ export class PrecioValorComponent implements OnInit {
           this.datos_grafico_precioCierre.push(p.c);
           this.datos_grafico_volumen.push(p.v);
         })
+        grafico_precio.update();
       });
     });
 
   }
 
-  loadChart(): void {
-    new Chart(this.chart, {
+  loadChart(): any {
+    return new Chart(this.chart, {
       type: "line",
       data: {
         datasets: [{

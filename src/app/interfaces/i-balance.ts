@@ -5,5 +5,6 @@ export interface IBalance {
     liabilities: { value: number },
     noncurrent_liabilities: { value: number },
     current_liabilities: { value: number },
-    equity: { value: number }
+    equity: { value: number },
+    Rdeuda?: { value: number }
 }

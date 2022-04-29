@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { filter, fromEvent } from 'rxjs';
 import { IInfoValor } from 'src/app/interfaces/i-info-valor';
 import { DataValoresService } from 'src/app/services/data-valores.service';
 
@@ -7,19 +9,36 @@ import { DataValoresService } from 'src/app/services/data-valores.service';
   templateUrl: './valores-analisis.component.html',
   styleUrls: ['./valores-analisis.component.css']
 })
-export class ValoresAnalisisComponent implements OnInit {
+export class ValoresAnalisisComponent implements OnInit, AfterViewInit {
 
   conceptos: string[] = ["Ticker", "Empresa", "Ver"];
 
   valores: IInfoValor[] = [];
 
-  valorBuscar = "";
+  @ViewChild('valorBuscar') valorBuscar!: ElementRef;
+
+  loading = false;
 
   constructor(private dataValores: DataValoresService) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.dataValores.valoresSubject.subscribe( r => this.valores = r);
     this.dataValores.getAllStocks();
+    this.loading = false;
+  }
+
+  ngAfterViewInit() {
+    fromEvent(this.valorBuscar.nativeElement,'keyup')
+    .pipe(
+        filter(Boolean),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        tap((text) => {
+          console.log(this.valorBuscar.nativeElement.value)
+        })
+    )
+    .subscribe(() => this.buscarValores());
   }
 
   botonSiguiente() {
@@ -31,7 +50,8 @@ export class ValoresAnalisisComponent implements OnInit {
   }
 
   buscarValores() {
-    console.log("Funciona!!!");
+    console.log(this.valorBuscar.nativeElement.value);
+    this.dataValores.searchStocks(this.valorBuscar.nativeElement.value);
   }
 
 }

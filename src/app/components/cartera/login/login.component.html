@@ -1,0 +1,40 @@
+<div class="container-fluid" style="background-image: url('../../../../assets/fondo-login.jpg'); background-size: cover;">
+    <div class="row p-2">
+        <div class="col-sm-4 col-md-5 mx-auto text-center text-white" style="display: flex; align-items: center;">
+          <p class="h2 row" style="font-style: italic;">
+            "Sea temeroso cuando los demás sean codiciosos y séa codicioso cuando los demas sean temerosos" - Warren Buffett
+          </p>
+        </div>
+        <div class="col-sm-8 col-md-7 col-lg-5 mx-auto">
+          <div class="card border-0 shadow rounded-3 my-5" style="background-color: #D3D3D3;">
+            <div class="card-body p-4 p-sm-5">
+              <h5 class="card-title text-center mb-5 fs-5" style="font-weight: bold;">Acceda a su simulador de cartera de Inversión:</h5>
+              <form>
+                <div class="form-floating mb-3">
+                  <input type="text" name="email" class="form-control" id="floatingInput" placeholder="name@example.com" [(ngModel)]="usuario.email">
+                  <label for="floatingInput">Correo</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" [(ngModel)]="usuario.password">
+                  <label for="floatingPassword">Contraseña</label>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                  <label class="form-check-label" for="rememberPasswordCheck">
+                    Recordar Contraseña
+                  </label>
+                </div>
+                <div class="d-grid">
+                    <button class="btn btn-primary col-12 m-2" (click)="login()">Log in</button>
+                    <button class="btn btn-info col-12 m-2" (click)="loginConGoogle()">Log in con Google</button>
+                </div>
+                <hr class="my-4">
+                <div class="d-grid mb-2">
+                  <p>No tienes cuenta? <button class="btn btn-warning" (click)="irRegistro()">Registrate aqui</button></p> <!-- REDIRIGIRÁ A LA PÁGINA DE ALTAS DE USUARIOS -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

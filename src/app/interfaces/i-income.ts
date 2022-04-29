@@ -5,7 +5,6 @@ export interface IIncome {
     benefits_costs_expenses: { value: number },
     operating_income_loss: { value: number },
     income_loss_from_equity_method_investments: { value: number },
-    
     interest_expense_operating: { value: number },
     income_loss_from_continuing_operations_before_tax: { value: number },
     income_loss_from_continuing_operations_after_tax: { value: number },

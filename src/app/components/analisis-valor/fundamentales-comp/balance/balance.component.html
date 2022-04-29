@@ -14,31 +14,31 @@
                 <tbody class="text-center">
                     <tr>
                         <td>Total Activo</td>
-                        <td *ngFor="let b of balance">{{b.assets.value | cantidadMoneda | number: '1.0-0'}}</td>
+                        <td *ngFor="let b of balance">{{b!.assets.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>Activo No Corriente</td>
-                        <td *ngFor="let b of balance">{{b.noncurrent_assets.value | cantidadMoneda | number: '1.0-0'}}</td>
+                        <td *ngFor="let b of balance">{{b!.noncurrent_assets.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>Activo Corriente</td>
-                        <td *ngFor="let b of balance">{{b.current_assets.value | cantidadMoneda | number: '1.0-0'}}</td>
+                        <td *ngFor="let b of balance">{{b!.current_assets.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>Total Pasivo</td>
-                        <td *ngFor="let b of balance">{{b.liabilities.value | cantidadMoneda | number: '1.0-0'}}</td>
+                        <td *ngFor="let b of balance">{{b!.liabilities.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>Pasivo No Corriente</td>
-                        <td *ngFor="let b of balance">{{b.noncurrent_liabilities.value | cantidadMoneda | number: '1.0-0'}}</td>
+                        <td *ngFor="let b of balance">{{b!.noncurrent_liabilities.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>Pasivo Corriente</td>
-                        <td *ngFor="let b of balance">{{b.current_liabilities.value | cantidadMoneda | number: '1.0-0'}}</td>
+                        <td *ngFor="let b of balance">{{b!.current_liabilities.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>Patrimonio Neto (Capital)</td>
-                        <td *ngFor="let b of balance">{{b.equity.value | cantidadMoneda | number: '1.0-0'}}</td>
+                        <td *ngFor="let b of balance">{{b!.equity.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -55,15 +55,15 @@
                     <tbody class="text-center">
                         <tr>
                             <td>Deuda</td>
-                            <td *ngFor="let b of balance">{{b.liabilities.value / b.equity.value | number: '2.2-2'}}</td><!-- (Pasivo / Patrimonio Neto) -->
+                            <td *ngFor="let b of balance">{{b!.Rdeuda!.value | number: '2.2-2'}}</td><!-- (Pasivo / Patrimonio Neto) -->
                         </tr>
                         <tr>
                             <td>Calidad de la Deuda</td>
-                            <td *ngFor="let b of balance">{{b.current_liabilities.value / b.liabilities.value | number: '1.2-2'}}</td><!-- (pasivo corriente / total pasivo) x 100 -->
+                            <td *ngFor="let b of balance">{{b!.current_liabilities.value / b!.liabilities.value | number: '1.2-2'}}</td><!-- (pasivo corriente / total pasivo) x 100 -->
                         </tr>
                         <tr>
                             <td>Liquidez</td>
-                            <td *ngFor="let b of balance">{{b.current_assets.value / b.current_liabilities.value | number: '1.2-2'}}</td><!-- (Activos disponibles + activos realizables) / Pasivo corriente -->
+                            <td *ngFor="let b of balance">{{b!.current_assets.value / b!.current_liabilities.value | number: '1.2-2'}}</td><!-- (Activos disponibles + activos realizables) / Pasivo corriente -->
                         </tr>
                         <tr>
                             <td>ROE</td>
