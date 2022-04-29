@@ -10,38 +10,41 @@ import { IIncome } from '../interfaces/i-income';
 })
 export class FundamentalesValoresService {
 
-  empresaFalsa = { 0 : { 
-    "cash_flow_statement": { 
-      "net_cash_flow": { "value": 0 },
-      "net_cash_flow_from_financing_activities": { "value": 0 },
-      "net_cash_flow_from_investing_activities": { "value": 0 },
-      "net_cash_flow_from_operating_activities": { "value": 0 }
-    }, 
-    "income_statement": { 
-      "revenues": { "value": 0 },
-      "cost_of_revenue": { "value": 0 },
-      "costs_and_expenses": { "value": 0 },
-      "benefits_costs_expenses": { "value": 0 },
-      "operating_income_loss": { "value": 0 },
-      "income_loss_from_equity_method_investments": { "value": 0 },
-      "interest_expense_operating": { "value": 0 },
-      "income_loss_from_continuing_operations_before_tax": { "value": 0 },
-      "income_loss_from_continuing_operations_after_tax": { "value": 0 },
-    }, 
-    "balance_sheet": { 
-      "assets": { "value": 0 }, 
-      "noncurrent_assets": { "value": 0 },
-      "current_assets": { "value": 0 }, 
-      "liabilities": { "value": 0 }, 
-      "noncurrent_liabilities": { "value": 0 }, 
-      "current_liabilities": { "value": 0 }, 
-      "equity": { "value": 0 },
+  empresaFalsa = { 0 : 
+    { 
+      "cash_flow_statement": { 
+        "net_cash_flow": { "value": 0 },
+        "net_cash_flow_from_financing_activities": { "value": 0 },
+        "net_cash_flow_from_investing_activities": { "value": 0 },
+        "net_cash_flow_from_operating_activities": { "value": 0 }
+      }, 
+      "income_statement": { 
+        "revenues": { "value": 0 },
+        "cost_of_revenue": { "value": 0 },
+        "costs_and_expenses": { "value": 0 },
+        "benefits_costs_expenses": { "value": 0 },
+        "operating_income_loss": { "value": 0 },
+        "income_loss_from_equity_method_investments": { "value": 0 },
+        "interest_expense_operating": { "value": 0 },
+        "income_loss_from_continuing_operations_before_tax": { "value": 0 },
+        "income_loss_from_continuing_operations_after_tax": { "value": 0 },
+      }, 
+      "balance_sheet": { 
+        "assets": { "value": 0 }, 
+        "noncurrent_assets": { "value": 0 },
+        "current_assets": { "value": 0 }, 
+        "liabilities": { "value": 0 }, 
+        "noncurrent_liabilities": { "value": 0 }, 
+        "current_liabilities": { "value": 0 }, 
+        "equity": { "value": 0 },
+        "RCalidadDeuda": { "value": 0 },
+        "RLiquidez": { "value": 0 },
+        "Rdeuda": { "value": 0 },
       } 
     }, 
   }
 
-
-  fundamentalesSubject = new BehaviorSubject<{ [key: string]: { [key: string]: { balance_sheet: IBalance, income_statement: IIncome, cash_flow_statement: ICashFlow } | null } }>({ 0: { 0: null } });
+  fundamentalesSubject = new BehaviorSubject<{ [key: string]: { [key: string]: { balance_sheet: IBalance, income_statement: IIncome, cash_flow_statement: ICashFlow } } }>({ 0: this.empresaFalsa });
   empresaFundSubject = new BehaviorSubject<{ [key: string]: { balance_sheet: IBalance, income_statement: IIncome, cash_flow_statement: ICashFlow } }>(this.empresaFalsa);
 
   constructor(private http: HttpClient) { }
@@ -69,7 +72,7 @@ export class FundamentalesValoresService {
           .subscribe(datos => {
             datos.balance_sheet['Rdeuda'] = { value: datos.balance_sheet.liabilities.value / datos.balance_sheet.equity.value };
             datos.balance_sheet['RCalidadDeuda'] = { value: datos.balance_sheet.current_liabilities.value / datos.balance_sheet.liabilities.value };
-            datos.balance_sheet['RLiquidez'] = { value: datos.current_assets.value / datos.current_liabilities.value };
+            datos.balance_sheet['RLiquidez'] = { value: datos.balance_sheet.current_assets.value / datos.balance_sheet.current_liabilities.value };
             fund[tickerBuscar][anyo] = datos;
             console.log(datos, fund);
             this.fundamentalesSubject.next(fund);
@@ -82,17 +85,7 @@ export class FundamentalesValoresService {
       this.empresaFundSubject.next(fund[tickerBuscar]);
     }
 
-
     return this.empresaFundSubject;
-    // return this.http.get<any>(fundamentalesURL).pipe(map(datos => {
-
-    //   return datos.results[0].financials;
-
-    //   //Calidad de la Deuda = b.current_liabilities.value
-    //   //Liquidez = b.current_assets.value / b.current_liabilities.value
-
-
-    // }))
   }
 
 }
