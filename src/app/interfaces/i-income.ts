@@ -7,5 +7,5 @@ export interface IIncome {
     income_loss_from_equity_method_investments: { value: number },
     interest_expense_operating: { value: number },
     income_loss_from_continuing_operations_before_tax: { value: number },
-    income_loss_from_continuing_operations_after_tax: { value: number },
+    net_income_loss_attributable_to_parent: { value: number }
 }

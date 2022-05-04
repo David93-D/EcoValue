@@ -10,6 +10,7 @@ import { DashboardComponent } from './components/cartera/dashboard/dashboard.com
 import { LoginComponent } from './components/cartera/login/login.component';
 import { RegistroComponent } from './components/cartera/registro/registro.component';
 import { CarteraComponent } from './pages/cartera/cartera.component';
+import { CriptoAnalisisComponent } from './pages/cripto-analisis/cripto-analisis.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ValoresAnalisisComponent } from './pages/valores-analisis/valores-analisis.component';
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'analisis-valor', component: ValoresAnalisisComponent},
   {path: 'cartera', component: CarteraComponent},
+  {path: 'cripto-analisis', component: CriptoAnalisisComponent},
   {path: 'balance', component: BalanceComponent},
   {path: 'income', component: IncomeComponent},
   {path: 'cashflow', component: CashFlowComponent},

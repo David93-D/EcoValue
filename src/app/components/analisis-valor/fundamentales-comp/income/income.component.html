@@ -4,21 +4,21 @@
     </div>
     <div class="row d-flex justify-content-sm-around">
         <div class="col-md-12">
-            <table class="table table-dark table-hover letra-ecovalue">
+            <table class="table letra-ecovalue color-t">
                 <thead class="text-center">
                     <tr>
                         <th>Concepto</th>
-                        <th>2017</th>
-                        <th>2018</th>
-                        <th>2019</th>
-                        <th>2020</th>
-                        <th>2021</th>
+                        <th *ngFor="let anyo of anyos">{{anyo}}</th>
                     </tr>
                 </thead>
                 <tbody class="text-center">
                     <tr>
                         <td>Ingresos Brutos</td>
-                        <td *ngFor="let i of income">{{i.revenues.value}}</td>
+                        <td *ngFor="let i of income">{{i!.revenues.value | cantidadMoneda | number: '1.0-0'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Bº Operativo</td>
+                        <td *ngFor="let i of income">{{i!.costs_and_expenses.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <!-- 
                     <tr>
@@ -31,30 +31,26 @@
                     </tr> -->
                     <tr>
                         <td>Gasto Intereses</td>
-                        <td *ngFor="let i of income">{{i.interest_expense_operating.value}}</td>
+                        <td *ngFor="let i of income">{{i!.interest_expense_operating.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>B/P antes de Impuestos</td>
-                        <td *ngFor="let i of income">{{i.income_loss_from_continuing_operations_before_tax.value}}</td>
+                        <td *ngFor="let i of income">{{i!.income_loss_from_continuing_operations_before_tax.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
                     <tr>
                         <td>B/P despues de Impuestos</td>
-                        <td *ngFor="let i of income">{{i.income_loss_from_continuing_operations_after_tax.value}}</td>
+                        <td *ngFor="let i of income">{{i!.net_income_loss_attributable_to_parent.value | cantidadMoneda}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="col-md-12">
-            <div class="col-lg-12">
+            <!-- <div class="col-lg-12">
                 <table class="table table-dark table-hover letra-ecovalue">
                     <thead class="text-center">
                         <tr>
                             <th>Ratios</th>
-                            <th>2017</th>
-                            <th>2018</th>
-                            <th>2019</th>
-                            <th>2020</th>
-                            <th>2021</th>
+                            <th *ngFor="let anyo of anyos">{{anyo}}</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -68,13 +64,13 @@
                         </tr>
                     </tbody>    
                 </table>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="col-lg-12">
                         <h2 class="letra-ecovalue">EVOLUCIÓN INGRESOS</h2>
                         <div class="d-flex justify-content-center">
-                            <!-- AQUI IRÁ EL GRAFICO -->
+                            <canvas id="grafico_income"></canvas>
                         </div>
                     </div>
                 </div>

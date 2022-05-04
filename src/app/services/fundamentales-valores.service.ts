@@ -16,7 +16,9 @@ export class FundamentalesValoresService {
         "net_cash_flow": { "value": 0 },
         "net_cash_flow_from_financing_activities": { "value": 0 },
         "net_cash_flow_from_investing_activities": { "value": 0 },
-        "net_cash_flow_from_operating_activities": { "value": 0 }
+        "net_cash_flow_from_operating_activities": { "value": 0 },
+        "CFdeuda": { "value": 0 },
+        "CFopv": { "value": 0 }
       }, 
       "income_statement": { 
         "revenues": { "value": 0 },
@@ -27,7 +29,7 @@ export class FundamentalesValoresService {
         "income_loss_from_equity_method_investments": { "value": 0 },
         "interest_expense_operating": { "value": 0 },
         "income_loss_from_continuing_operations_before_tax": { "value": 0 },
-        "income_loss_from_continuing_operations_after_tax": { "value": 0 },
+        "net_income_loss_attributable_to_parent": { "value": 0 },
       }, 
       "balance_sheet": { 
         "assets": { "value": 0 }, 
@@ -40,6 +42,9 @@ export class FundamentalesValoresService {
         "RCalidadDeuda": { "value": 0 },
         "RLiquidez": { "value": 0 },
         "Rdeuda": { "value": 0 },
+        "ROE": { "value": 0 },
+        "ROA": { "value": 0 },
+        "ROCE": { "value": 0 }
       } 
     }, 
   }
@@ -73,6 +78,11 @@ export class FundamentalesValoresService {
             datos.balance_sheet['Rdeuda'] = { value: datos.balance_sheet.liabilities.value / datos.balance_sheet.equity.value };
             datos.balance_sheet['RCalidadDeuda'] = { value: datos.balance_sheet.current_liabilities.value / datos.balance_sheet.liabilities.value };
             datos.balance_sheet['RLiquidez'] = { value: datos.balance_sheet.current_assets.value / datos.balance_sheet.current_liabilities.value };
+            datos.balance_sheet['ROE'] = { value: (datos.balance_sheet.equity.value / datos.income_statement.income_loss_from_continuing_operations_after_tax.value) * 100 } 
+            datos.balance_sheet['ROA'] = { value: datos.income_statement.income_loss_from_continuing_operations_after_tax.value / datos.balance_sheet.assets.value }
+            datos.balance_sheet['ROCE'] = { value: datos.income_statement.operating_income_loss.value / (datos.balance_sheet.assets.value - datos.balance_sheet.current_liabilities.value) } 
+            datos.cash_flow_statement['CFdeuda'] = { value: datos.balance_sheet.noncurrent_liabilities.value / datos.cash_flow_statement.net_cash_flow_from_financing_activities.value }
+            datos.cash_flow_statement['CFopv'] = { value: datos.cash_flow_statement.net_cash_flow_from_operating_activities.value / datos.income_statement.revenues.value };
             fund[tickerBuscar][anyo] = datos;
             console.log(datos, fund);
             this.fundamentalesSubject.next(fund);

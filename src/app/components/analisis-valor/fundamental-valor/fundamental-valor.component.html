@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: #2E4053;">
+<div class="container-fluid fondo">
     <div class="row text-center p-1">
         <div class="col-12 col-lg-3">
             <button class="btn paginacion m-2" style="color: whitesmoke;" (click)="volver()"><mat-icon class="icono">arrow_back</mat-icon> Volver a la lista de valores</button>
@@ -10,7 +10,6 @@
     </div>
     <app-balance
         [balance]="items_balance"
-        [income]="items_income"
         [anyos]="array_anyos"
     ></app-balance>
     <app-income

@@ -18,8 +18,6 @@ export class PrecioValorComponent implements OnInit {
 
   datos_grafico_precioCierre: number[] = [];
 
-  datos_grafico_volumen: number[] = [];
-
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
@@ -33,15 +31,11 @@ export class PrecioValorComponent implements OnInit {
     this.obtenerMeses();
     this._route.params.subscribe(p => {
       const ultima_fecha = this.getUltimaFecha(p['last_updated_utc']);
-      
       const inicio_fecha = this.getInicioFecha(ultima_fecha);
-      
       let ticker = p['ticker'];
       this.dataValores.getDatosPrecio(ticker,inicio_fecha, ultima_fecha).subscribe(response => {
-        //console.log(response);
         response.map((p: any) => {
           this.datos_grafico_precioCierre.push(p.c);
-          this.datos_grafico_volumen.push(p.v);
         })
         grafico_precio.update();
       });

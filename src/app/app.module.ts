@@ -33,16 +33,17 @@ import { CashFlowComponent } from './components/analisis-valor/fundamentales-com
 import { IncomeComponent } from './components/analisis-valor/fundamentales-comp/income/income.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiInterceptorService } from './services/api-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // -> HOME
 import { BlogComponent } from './components/home/blog/blog.component';
+import { AddArticuloComponent } from './components/home/add-articulo/add-articulo.component';
 
 // -> CARTERA
 import { LoginComponent } from './components/cartera/login/login.component';
 import { DashboardComponent } from './components/cartera/dashboard/dashboard.component';
 import { RegistroComponent } from './components/cartera/registro/registro.component';
+import { PosicionesCarteraComponent } from './components/cartera/posiciones-cartera/posiciones-cartera.component';
 
 // PIPES
 import { CantidadMonedaPipe } from './pipes/cantidad-moneda.pipe';
@@ -50,6 +51,15 @@ import { CantidadMonedaPipe } from './pipes/cantidad-moneda.pipe';
 // FIREBASE
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+
+// INTERCEPTORS
+import { ApiInterceptorService } from './services/api-interceptor.service';
+import { FirebaseInterceptorService } from './services/firebase-interceptor.service';
+import { CriptoAnalisisComponent } from './pages/cripto-analisis/cripto-analisis.component';
+import { ListaCriptoComponent } from './components/analisis-cripto/lista-cripto/lista-cripto.component';
+import { CriptoFilterPipe } from './pipes/cripto-filter.pipe';
+
+
 
 @NgModule({
   declarations: [
@@ -70,7 +80,12 @@ import { AngularFireModule } from '@angular/fire/compat';
     CarteraComponent,
     LoginComponent,
     DashboardComponent,
-    RegistroComponent
+    RegistroComponent,
+    AddArticuloComponent,
+    PosicionesCarteraComponent,
+    CriptoAnalisisComponent,
+    ListaCriptoComponent,
+    CriptoFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -88,11 +103,8 @@ import { AngularFireModule } from '@angular/fire/compat';
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiInterceptorService,
-      multi: true
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: FirebaseInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

@@ -43,14 +43,9 @@ export class DataValoresService {
   }
 
   getDatosPrecio(ticker: string,inicio_fecha:string, ultima_fecha: string) {
-    //console.log(inicio_fecha);
-    //console.log(ultima_fecha);
-    
     let stock_price = `https://api.polygon.io/v2/aggs/ticker/${ticker}/range/1/month/${inicio_fecha}/${ultima_fecha}?adjusted=true&sort=asc&limit=50000`;
     return this.http.get<any>(stock_price).pipe(map(p => {
       return p.results.map((d: IPrecioValor) => {
-        //console.log(d);
-        
         return d;
       });
     }));

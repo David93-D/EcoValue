@@ -19,9 +19,9 @@ export class FundamentalValorComponent implements OnInit {
 
   items_balance: (IBalance|null)[] = [];
 
-  items_income: IIncome[] = [];
+  items_income: (IIncome|null)[] = [];
 
-  items_cashFlow: ICashFlow[] = [];
+  items_cashFlow: (ICashFlow|null)[] = [];
 
   constructor(
     private _route: ActivatedRoute, 
@@ -31,25 +31,15 @@ export class FundamentalValorComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerAnyos();
-  
-      
-    
       this._route.params.subscribe(p => {
         this.valor_nombre = p['name'];
         const ticker = p['ticker'];
         this.fundamentalesValores.getFundamentales(ticker).subscribe(response => {
-
           console.log(response);
-
           this.array_anyos = Object.keys(response).map(k=> parseInt(k));
           this.items_balance = Object.values(response).map(r => r != null ? r.balance_sheet : null)
-
-          // this.items_balance.push(response.balance_sheet);        
-
-          // this.items_income.push(response.income_statement); 
-
-          // this.items_cashFlow.push(response.cash_flow_statement);
-
+          this.items_income = Object.values(response).map(n => n != null ? n.income_statement : null); 
+          this.items_cashFlow = Object.values(response).map(f => f != null ? f.cash_flow_statement : null);
         })
       });
 

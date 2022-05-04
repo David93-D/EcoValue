@@ -15,7 +15,22 @@
     </div>
     <div class="row">
         <div class="col">
-            TABLA CON LISTA DE LAS POSICIONES EN CARTERA
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th *ngFor="let itemPos of itemsTabla">{{itemPos}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        app-posiciones-cartera
+                        [posicion]="posicion"
+                        *ngFor="let posicion of listaPosiciones"
+                    >
+                    </tr>
+                </tbody>
+                
+            </table>
         </div>
         <div class="col">
             GRÁFICO

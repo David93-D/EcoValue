@@ -14,7 +14,7 @@ export class SidenavComponent implements OnInit {
     {name:"Home", route:"home", icon:"home"},
     {name:"Análisis de Valores", route:"analisis-valor", icon:"analytics"},
     {name:"Cartera", route:"cartera", icon:"account_balance"},
-    {name:"Criptomonedas", route:"criptomonedas", icon:"currency_bitcoin"},
+    {name:"Criptomonedas", route:"cripto-analisis", icon:"currency_bitcoin"},
     {name:"Recursos", route:"recursos", icon:"book"},
     {name:"Contacto", route:"contacto", icon:"contact_mail"}
   ]
