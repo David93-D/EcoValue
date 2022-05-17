@@ -1,0 +1,11 @@
+.botones {
+    background-color: #b4975a;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.botones:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #b4975a;
+    text-shadow: none;
+}

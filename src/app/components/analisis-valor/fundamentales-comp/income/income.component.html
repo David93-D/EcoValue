@@ -20,15 +20,6 @@
                         <td>Bº Operativo</td>
                         <td *ngFor="let i of income">{{i!.costs_and_expenses.value | cantidadMoneda | number: '1.0-0'}}</td>
                     </tr>
-                    <!-- 
-                    <tr>
-                        <td>Otros gastos Operativos</td>
-                        <td *ngFor="let ce of income">{{ce.costs_and_expenses.value | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Beneficio/Perdida Operativo</td>
-                        <td *ngFor="let oi of income">{{oi.operating_income_loss.value | currency}}</td>
-                    </tr> -->
                     <tr>
                         <td>Gasto Intereses</td>
                         <td *ngFor="let i of income">{{i!.interest_expense_operating.value | cantidadMoneda | number: '1.0-0'}}</td>
@@ -44,34 +35,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12">
-            <!-- <div class="col-lg-12">
-                <table class="table table-dark table-hover letra-ecovalue">
-                    <thead class="text-center">
-                        <tr>
-                            <th>Ratios</th>
-                            <th *ngFor="let anyo of anyos">{{anyo}}</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>    
-                </table>
-            </div> -->
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="col-lg-12">
-                        <h2 class="letra-ecovalue">EVOLUCIÓN INGRESOS</h2>
-                        <div class="d-flex justify-content-center">
-                            <canvas id="grafico_income"></canvas>
-                        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="col-lg-12">
+                    <h2 class="letra-ecovalue">EVOLUCIÓN INGRESOS</h2>
+                    <div class="d-flex justify-content-center" id="contenedor">
+                        <canvas id="grafico_income"></canvas>
                     </div>
                 </div>
             </div>

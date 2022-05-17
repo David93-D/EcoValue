@@ -1,9 +1,25 @@
-.paginacion:hover {
-    background-color: black;
+.fondo {
+    background-color: #2874A6;
+}
+
+.titulo-analisis {
+    font-size: 3em;
+    color: #b4975a; 
+    font-family: Georgia, serif;
+    text-shadow: 0.1em 0.1em 0.2em black;
 }
 
 .letra-ecovalue {
     color: #b4975a; 
     font-family: Georgia, serif; 
     font-weight: bold;
+}
+
+.paginacion {
+    color: white;
+}
+
+.paginacion:hover {
+    background-color: #3f51b5;
+    border: 1px solid #b4975a;
 }

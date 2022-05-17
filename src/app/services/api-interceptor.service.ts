@@ -12,8 +12,6 @@ export class ApiInterceptorService {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    console.log("API INTERCEPTOR");
-    
     const apiKey = `&apiKey=eCI2fh7a4zipFKtXBhTX5zDvr_6V3whw`;
 
     let httpsReq;

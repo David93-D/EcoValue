@@ -1,0 +1,69 @@
+<div class="container p-2">
+    <form id="operaciones">
+        <legend>Introduce Operación:</legend>
+        <div class="row mb-2">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="tipo_Operacion">Tipo de operación:</label>
+                        <select [(ngModel)]="tipoOperacion" name="operacion" class="form-control">
+                            <option [value]="op" *ngFor="let op of listaOp">{{op}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="valor">Indica el nombre del valor:</label>
+                        <input type="search" class="form-control" name="valorSeleccionado" #valorSeleccionado>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="n_valores">Nº de valores:</label>
+                        <input type="number" class="form-control" name="n_valores" (change)="getComision()" [(ngModel)]="n_valores" id="n_valores">
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-12">
+                        <label for="precio_valor">Precio por accion:</label>
+                        <input type="number" class="form-control" name="precioValor" [value]="precioValor" (change)="getTotalOp()" [(ngModel)]="precioValor" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="comision">Comisión:</label>
+                        <input type="number" class="form-control" name="comision" id="comision" [(ngModel)]="comision" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label for="totalOperacion">Total operación:</label>
+                        <input type="number" name="totalOperacion" class="form-control" id="totalOperacion" [(ngModel)]="totalOperacion" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <h3 *ngIf="tickerValorEleg">Ticker del Valor a operar: {{tickerValorEleg}}</h3>
+        </div>
+        <div class="row text-center mb-1" *ngIf="valoresOp">
+            <ul class="list-group" *ngFor="let val of valoresOp">
+                <li class="list-group-item">{{val.ticker}} - {{val.name}} - 
+                <button class="btn btn-warning" (click)="getValorSel(val.ticker, val.name)">Seleccionar</button></li>
+            </ul>
+        </div>
+        <div class="row justify-content-around text-center">
+            <div class="col">
+                <button mat-button mat-dialog-close type="submit" class="btn btn-primary" (click)="OperarPosicion()">Ejecutar Operación</button>
+            </div>
+            <div class="col">
+                <button mat-button type="reset" class="btn btn-danger">Reiniciar datos</button>
+            </div>
+            <div class="col">
+               <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>

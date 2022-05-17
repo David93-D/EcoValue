@@ -1,1 +1,7 @@
-<p>lista-cripto works!</p>
+<td class="centrar">{{cripto.ticker}}</td>
+<td class="centrar">{{cripto.name}}</td>
+<td class="centrar">
+    <div>
+        <span class="badge botones" [routerLink]="['/precio-cripto', cripto.ticker, cripto.name, cripto.last_updated_utc]">Precio</span>
+    </div>
+</td>

@@ -1,23 +1,36 @@
-<div class="container">
-    <div class="card text-center">
-      <div class="card-header">
-        <b>REGISTRO</b>
+<div class="container-fluid h-100" style="background-image: url('../../../../assets/fondo-login.jpg'); background-size: cover;">
+  <div class="row p-2">
+      <div class="col-sm-4 col-md-5 mx-auto text-center text-white" style="display: flex; align-items: center;">
+        <p class="h2 row" style="font-style: italic;">
+          ¡¡Registrese para acceder a nuestro servicio de simulación de Cartera de Inversión!!
+        </p>
       </div>
-      <form class="row g-3 m-2">
-        <div class="col-12">
-          <label class="enunciado">Email</label>
-          <input class="form-control m-2" type="email" name="email" placeholder="ingrese su email" [(ngModel)]="usuario.email">
-          <span *ngIf="this.formularioAlta.get('email')?.errors?.['required']">El email no puede quedar vacío</span>
-          <span *ngIf="this.formularioAlta.get('email')?.errors?.['email']">Debe tener formato de email</span>
+      <div class="col-sm-8 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5" style="background-color: #D3D3D3;">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fs-5" style="font-weight: bold;">Registro de Usuario</h5>
+            <form [formGroup]="formularioAlta" (ngSubmit)="registrarse()">
+              <div class="form-floating mb-3">
+                <input class="form-control m-2" formControlName="email" type="email" placeholder="ingrese su email" [(ngModel)]="usuario.email">
+                <label for="floatingInput">Correo</label>
+                <span class="warn" *ngIf="this.formularioAlta.get('email')?.errors?.['required']">El email no puede quedar vacío</span>
+                <span class="warn" *ngIf="this.formularioAlta.get('email')?.errors?.['email']">Debe tener formato de email</span>
+              </div>
+              <div class="form-floating mb-3">
+                <input class="form-control m-2" formControlName="password" type="password" placeholder="ingrese su password" [(ngModel)]="usuario.password">
+                <label for="floatingInput">Password</label>
+                <span class="warn" *ngIf="this.formularioAlta.get('password')?.errors?.['required']">La contraseña no puede quedar vacía</span>
+                <span class="warn" *ngIf="this.formularioAlta.get('password')?.errors?.['minLength']">La contraseña debe tener almenos 5 caractéres</span>
+              </div>
+              <div class="col-12 m-3">
+                <button type="submit" class="btn btn-primary">Registrarse</button>
+              </div>
+              <div class="d-grid">
+                <label for="">Ya tienes cuenta? <button class="btn btn-primary col-4 m-2" routerLink="/login">logIn</button></label>
+              </div>
+            </form>
+          </div>
         </div>
-        <div class="col-12">
-          <label class="enunciado">Password</label>
-          <input class="form-control m-2" type="password" name="password" placeholder="ingrese su password" [(ngModel)]="usuario.password">
-          <span *ngIf="this.formularioAlta.get('password')?.errors?.['required']">La contraseña no puede quedar vacía</span>
-          <span *ngIf="this.formularioAlta.get('password')?.errors?.['minLength']">La contraseña debe tener almenos 5 caractéres</span>
-        </div>
-        <button class="btn btn-primary col-12 m-2" (click)="registrarse()">Crear cuenta</button>
-        <label for="">Ya tienes cuenta? <button mat-button color="primary" routerLink="/login">logIn</button></label>
-      </form>
+      </div>
     </div>
 </div>

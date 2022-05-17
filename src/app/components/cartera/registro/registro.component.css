@@ -6,6 +6,6 @@
     height: 85vh;
 }
 
-.enunciado {
-    float: left;
+.warn {
+    color: red;
 }

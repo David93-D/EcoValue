@@ -21,6 +21,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 // COMPONENTES
 // -> ANALISIS-VALOR
@@ -51,15 +52,23 @@ import { CantidadMonedaPipe } from './pipes/cantidad-moneda.pipe';
 // FIREBASE
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 
 // INTERCEPTORS
 import { ApiInterceptorService } from './services/api-interceptor.service';
-import { FirebaseInterceptorService } from './services/firebase-interceptor.service';
 import { CriptoAnalisisComponent } from './pages/cripto-analisis/cripto-analisis.component';
 import { ListaCriptoComponent } from './components/analisis-cripto/lista-cripto/lista-cripto.component';
 import { CriptoFilterPipe } from './pipes/cripto-filter.pipe';
-
-
+import { DetallesCriptoComponent } from './components/analisis-cripto/detalles-cripto/detalles-cripto.component';
+import { DialogOperacionesComponent } from './components/cartera/dialog-operaciones/dialog-operaciones.component';
+import { PrecioCriptoComponent } from './components/analisis-cripto/precio-cripto/precio-cripto.component';
+import { RentabilidadesCarteraComponent } from './components/cartera/rentabilidades-cartera/rentabilidades-cartera.component';
+import { AuthService } from './services/auth.service';
+import { VerificarCuentaComponent } from './components/cartera/verificar-cuenta/verificar-cuenta.component';
+import { ShowArticuloComponent } from './components/home/show-articulo/show-articulo.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +94,13 @@ import { CriptoFilterPipe } from './pipes/cripto-filter.pipe';
     PosicionesCarteraComponent,
     CriptoAnalisisComponent,
     ListaCriptoComponent,
-    CriptoFilterPipe
+    CriptoFilterPipe,
+    DetallesCriptoComponent,
+    DialogOperacionesComponent,
+    PrecioCriptoComponent,
+    RentabilidadesCarteraComponent,
+    VerificarCuentaComponent,
+    ShowArticuloComponent
   ],
   imports: [
     BrowserModule,
@@ -97,14 +112,19 @@ import { CriptoFilterPipe } from './pipes/cripto-filter.pipe';
     MatListModule,
     MatCardModule,
     MatButtonModule,
+    MatDialogModule,
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
   ],
   providers: [
+    AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptorService, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: FirebaseInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

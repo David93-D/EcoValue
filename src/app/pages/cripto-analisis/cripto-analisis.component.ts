@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ICripto } from 'src/app/interfaces/i-cripto';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { filter, fromEvent } from 'rxjs';
+import { IInfoCripto } from 'src/app/interfaces/i-info-cripto';
 import { DataCriptoService } from 'src/app/services/data-cripto.service';
 
 @Component({
@@ -9,47 +11,47 @@ import { DataCriptoService } from 'src/app/services/data-cripto.service';
 })
 export class CriptoAnalisisComponent implements OnInit {
 
-  cryptoElegida: ICripto | undefined;
+  conceptos: string[] = ["Ticker", "Cripto - Divisa", "Ver más"];
 
-  crypto_Imagen: String = "";
+  criptos: IInfoCripto[] = [];
 
-  mostrarImg = false;
+  @ViewChild('valorBuscar') criptoBuscar!: ElementRef;
 
-  datosCrypto: ICripto | undefined;
-  filterCrypto!: "";
-  arrayCryptos: ICripto[] = [];
+  loading = false;
 
   constructor(private dataCripto: DataCriptoService) { }
 
   ngOnInit(): void {
-    //this.obtenerCrypto();
-
-    const tiempoTranscurrido = Date.now();
-    const hoy = new Date(tiempoTranscurrido);
-    hoy.toISOString();
-
-    console.log(hoy.toISOString());
-    
-
-    this.obtenerTodasCryptos();
+    this.loading = true;
+    this.dataCripto.criptosSubject.subscribe( r => this.criptos = r);
+    this.dataCripto.getAllCryptos();
+    this.loading = false;
   }
 
-  // obtenerCrypto() {
-  //   this.dataCripto.getCrypto().subscribe( response => {
-  //     this.datosCrypto = response;
-  //   });
-  // }
-
-  obtenerTodasCryptos() {
-    this.dataCripto.getAllCryptos().subscribe( response => {
-      this.arrayCryptos = response;
-    });
+  ngAfterViewInit() {
+    fromEvent(this.criptoBuscar.nativeElement,'keyup')
+    .pipe(
+        filter(Boolean),
+        debounceTime(1000),
+        distinctUntilChanged(),
+        tap((text) => {
+          console.log(this.criptoBuscar.nativeElement.value)
+        })
+    )
+    .subscribe(() => this.buscarCriptos());
   }
 
+  botonSiguiente() {
+    this.dataCripto.getAllCryptosPages(1);
+  }
 
-  // const limite = fecha.indexOf('T');
-  // const ultima_fecha = fecha.substring(0, limite);
-  // return ultima_fecha;
+  botonAtras() {
+    this.dataCripto.getAllCryptosPages(3);
+  }
 
+  buscarCriptos() {
+    console.log(this.criptoBuscar.nativeElement.value);
+    this.dataCripto.searchCriptos(this.criptoBuscar.nativeElement.value);
+  }
 
 }

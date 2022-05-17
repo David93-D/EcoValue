@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { IIncome } from 'src/app/interfaces/i-income';
 
@@ -14,15 +14,29 @@ export class IncomeComponent implements OnInit {
 
   chart: any;
 
-  datos_grafico_income: number[] = [];
+  grafico_income: any;
+
+  datos_grafico_income: IIncome[] = [];
+
+  ingresosBrutos: number[] = [];
+  bpAntesImp: number[] = [];
+  bpDespImp: number[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
     this.chart = document.getElementById("grafico_income");
     Chart.register(...registerables);
-    let grafico_income = this.loadChart();
-    grafico_income.update();
+    this.grafico_income = this.loadChart();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.datos_grafico_income = changes["income"]["currentValue"];
+    this.anyos = changes["anyos"]["currentValue"];
+    this.ingresosBrutos = this.datos_grafico_income.map(d => d.revenues.value);
+    this.bpAntesImp = this.datos_grafico_income.map(d => d.income_loss_from_continuing_operations_before_tax.value);
+    this.bpDespImp = this.datos_grafico_income.map(d => d.income_loss_from_continuing_operations_after_tax.value);
+    this.grafico_income.update();
   }
 
   loadChart(): any {
@@ -33,24 +47,43 @@ export class IncomeComponent implements OnInit {
         datasets: [
           {
             label: "Ingresos Brutos",
-            data: [20, 30, 40, 50],
+            data: this.ingresosBrutos,
             borderColor: 'red',
-            backgroundColor: 'white',
+            backgroundColor: 'red',
           },
           {
             label: "B/P antes de Impuestos",
-            data: [50, 60, 70, 80],
+            data: this.bpAntesImp,
             borderColor: 'yellow',
-            backgroundColor: 'grey',
+            backgroundColor: 'yellow',
           },
           {
             label: "B/P despues de Impuestos",
-            data: [500, 600, 700, 800],
+            data: this.bpDespImp,
             borderColor: 'blue',
-            backgroundColor: 'pink',
+            backgroundColor: 'blue',
           }
-        ],
-        
+        ], 
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            ticks: { color: 'white' }
+          },
+          x: {
+            ticks: { color: 'white' }
+          }
+        },
+        plugins: {
+          legend: {
+              display: true,
+              labels: {
+                  color: '#b4975a',
+                  font: { size: 14}
+              }
+          }
+      }
       }
     })
   }

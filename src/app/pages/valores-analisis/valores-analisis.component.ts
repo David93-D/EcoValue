@@ -50,7 +50,6 @@ export class ValoresAnalisisComponent implements OnInit, AfterViewInit {
   }
 
   buscarValores() {
-    console.log(this.valorBuscar.nativeElement.value);
     this.dataValores.searchStocks(this.valorBuscar.nativeElement.value);
   }
 

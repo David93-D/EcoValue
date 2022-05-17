@@ -1,7 +1,7 @@
-<div class="container-fluid" style="background-color: #2E4053;">
+<div class="container-fluid fondo">
     <a class="btn paginacion m-2" style="color: whitesmoke;" (click)="volver()"><mat-icon class="icono">arrow_back</mat-icon> Volver a la lista de valores</a>
     <div class="text-center">
-        <h1 class="letra-ecovalue">{{valor_nombre}}</h1>
+        <h1 class="titulo-analisis">{{valor_nombre}}</h1>
     </div>
     <div class="row">
         <div class="col-md-6" *ngFor="let noticia of news_valores">
@@ -11,7 +11,7 @@
               <h5 class="card-title">Autor: {{noticia.author}}</h5>
               <h4>Fecha de publicación: {{noticia.published_utc}}</h4>
               <img [src]="noticia.image_url" width="200" height="100" alt="Imagen Art.">
-              <p class="card-text mt-1">{{noticia.description}}</p>
+              <p class="card-text mt-1">{{noticia.description | slice:0:120}}</p>
               <a class="btn btn-primary" [href]="noticia.article_url">Ir a la noticia</a>
             </div>
           </div>

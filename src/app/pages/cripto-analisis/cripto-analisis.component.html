@@ -1,47 +1,45 @@
-<div class="container">
-    <div class="row p-3 mt-2 text-center" style="background-color: #459aff;">
-      <h1>INFO CRYPTOS</h1>
-      <h2>Cotización de los diferentes pares de divisas y cryptomonedas</h2>
+<div class="container-fluid fondo">
+    <div class="row p-3 text-center">
+        <h1 class="titulo-analisis">Análisis de CriptoActivos</h1>
     </div>
-    <div class="row p-3 mt-2 text-center" *ngIf="mostrarImg">
-      <div>
-        <img [src]="crypto_Imagen" alt="" width="500" height="500">
+    <div class="row justify-content-center mb-3">
+      <div class="col-lg-6 col-md-7 col-10">
+          <form action="">
+              <div class="input-group caja-busqueda">
+                  <input type="search" name="criptoBuscar" class="form-control" placeholder="Ticker o Nombre de la cripto" #valorBuscar>
+                  <button type="submit" class="btn lupa"><mat-icon>search</mat-icon></button>
+              </div>
+          </form>
       </div>
-    </div>
-    <div class="container text-center m-2" style="background-color: #01263a; color: #fff;">
-        <form>
-          <label class="h3">Filtra el par divisa/crypto: </label>
-          <input type="text" [(ngModel)]="filterCrypto" name="filterC" id="">
-        </form>
-        <div>Divisa/Cryptomoneda a buscar: {{filterCrypto}}</div>
-    </div>
-    <div class="container-fluid p-2 text-center">
-        <table class="table table-hover">
-          <thead>
-              <tr class="bg-info">
-                  <th>Mostrar Símbolo</th>
-                  <th>Divisa/Cryptomoneda</th>
-                  <th>Precio más alto</th>
-                  <th>Precio más bajo</th>
-                  <th>Precio de cierre</th>
-                  <th>Nº de Transacciones</th>
-                  <th>Precio de apertura</th>
-                  <th>Tiempo</th>
-                  <th>Volumen de negociación</th>
-                  <th>Precio Medio por Volumen</th>
+  </div>
+    <div class="row">
+      <div class="row justify-content-lg-start">
+        <div class="m-1">
+            <button class="btn paginacion" (click)="botonAtras()"><mat-icon class="icono">arrow_back</mat-icon>Anterior</button>
+            <button class="btn paginacion" (click)="botonSiguiente()">Siguiente<mat-icon class="icono">arrow_forward</mat-icon></button>
+        </div>
+      </div>
+      <div class="col-lg-12 col-md-12 col-12 text-center">
+        <table class="table letra-ecovalue fondo-tabla">
+          <thead class="text-center">
+              <tr>
+                <th *ngFor="let c of conceptos">{{c}}</th>
               </tr>
           </thead>
-          <tbody><!-- *ngClass -->
+          <tbody>
               <tr
                 app-lista-cripto
-                *ngFor="let cripto of arrayCryptos | criptoFilter:filterCrypto; let isEven = even; let isOdd = odd;" [ngClass]="{'azul': isEven, 'yellow': isOdd}"
+                *ngFor="let cripto of criptos;let isEven = even; let isOdd = odd;" [ngClass]="{'azul': isEven, 'yellow': isOdd}"
                 [cripto]="cripto"
-                
                 >
               </tr>
           </tbody>
         </table>
-      </div>
+    </div>
     </div>
 
-    <!-- (positionMarcar)="getCrypto($event)" -->
+
+
+
+
+    </div>

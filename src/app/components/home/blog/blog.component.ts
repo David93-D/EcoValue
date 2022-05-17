@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IArticulo } from 'src/app/interfaces/i-articulo';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-blog',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogComponent implements OnInit {
 
-  constructor() { }
+  llistarArticulos: IArticulo[] = [];
+
+  constructor(private firebase:FirebaseService) { }
 
   ngOnInit(): void {
+    this.mostrarArticulos();
+  }
+
+  mostrarArticulos() {
+    this.firebase.getAllArticulos().subscribe((response) => {
+      this.llistarArticulos = response;
+    })
   }
 
 }

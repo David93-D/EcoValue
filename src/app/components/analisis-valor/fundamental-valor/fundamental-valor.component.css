@@ -13,5 +13,6 @@
 }
 
 .paginacion:hover {
-    background-color: black;
+    background-color: #3f51b5;
+    border: 1px solid #b4975a;
 }

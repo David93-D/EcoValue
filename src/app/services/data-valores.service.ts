@@ -12,17 +12,18 @@ export class DataValoresService {
 
   valoresSubject = new Subject<IInfoValor[]>();
 
+
+  opVal = new Subject<IInfoValor[]>();
+
   arrayURL = [
-    "https://api.polygon.io/v3/reference/tickers?active=true&sort=ticker&order=asc&limit=10"
+    "https://api.polygon.io/v3/reference/tickers?type=CS&active=true&sort=ticker&order=asc&limit=10"
   ]
 
   constructor(private http: HttpClient) { }
 
   getAllStocks() {
     let allStocksURL = "";
-
     allStocksURL = this.arrayURL[this.arrayURL.length-1]; // OBTENEMOS LA ULTIMA POSICÍON
-  
     this.http.get<any>(allStocksURL).pipe(map(datos => {
       this.arrayURL.push(datos.next_url);
       return datos.results;
@@ -37,7 +38,6 @@ export class DataValoresService {
       } else {
         this.arrayURL.push(datos.next_url);
       }
-      console.log(this.arrayURL);
       return datos.results;
     })).subscribe(values => this.valoresSubject.next(values))
   }
@@ -61,10 +61,24 @@ export class DataValoresService {
   }
 
   searchStocks(stringBuscar: string) {
-    let stocks_buscar = `https://api.polygon.io/v3/reference/tickers?search=${stringBuscar}&active=true&sort=ticker&order=asc&limit=10`;
+    let stocks_buscar = `https://api.polygon.io/v3/reference/tickers?type=CS&search=${stringBuscar}&active=true&sort=ticker&order=asc&limit=10`;
     return this.http.get<any>(stocks_buscar).pipe(map(datos => {
       return datos.results;
     })).subscribe(values => this.valoresSubject.next(values))
   }
   
+  opcionesValores(stringBuscar: string) {
+    let valores_buscar = `https://api.polygon.io/v3/reference/tickers?type=CS&search=${stringBuscar}&active=true&sort=ticker&order=asc&limit=3`;
+    return this.http.get<any>(valores_buscar).pipe(map(d => {      
+      return d.results;
+    })).subscribe(values => this.opVal.next(values));
+  }
+
+  getPrecioValor(valor: string) {
+    let urlPrecioValor = `https://api.polygon.io/v2/aggs/ticker/${valor}/prev?adjusted=true&apiKey=eCI2fh7a4zipFKtXBhTX5zDvr_6V3whw`;
+    return this.http.get<any>(urlPrecioValor).pipe(map(datos => {
+      return datos.results[0].c;
+    }));
+  }
+
 }

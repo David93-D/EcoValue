@@ -10,6 +10,8 @@ import { DataValoresService } from 'src/app/services/data-valores.service';
 })
 export class PrecioValorComponent implements OnInit {
 
+  valor_nombre!: string;
+
   chart: any;
 
   anyo_actual = new Date().getFullYear();
@@ -30,6 +32,7 @@ export class PrecioValorComponent implements OnInit {
     let grafico_precio = this.loadChart();
     this.obtenerMeses();
     this._route.params.subscribe(p => {
+      this.valor_nombre = p['name'];
       const ultima_fecha = this.getUltimaFecha(p['last_updated_utc']);
       const inicio_fecha = this.getInicioFecha(ultima_fecha);
       let ticker = p['ticker'];
@@ -40,7 +43,6 @@ export class PrecioValorComponent implements OnInit {
         grafico_precio.update();
       });
     });
-
   }
 
   loadChart(): any {
@@ -49,11 +51,22 @@ export class PrecioValorComponent implements OnInit {
       data: {
         datasets: [{
           data: this.datos_grafico_precioCierre,
-          label: "Precio de cierre",
+          label: "Precio a cierre de mes",
           backgroundColor: '#007bff',
           borderColor: 'yellow'
         }],
         labels: this.array_meses
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            ticks: { color: '#fff' }
+          },
+          x: {
+            ticks: { color: 'white' }
+          }
+        }
       }
     })
   }

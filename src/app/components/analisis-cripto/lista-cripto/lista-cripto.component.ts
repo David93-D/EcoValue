@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICripto } from 'src/app/interfaces/i-cripto';
+import { IInfoCripto } from 'src/app/interfaces/i-info-cripto';
 
 @Component({
   selector: 'tr[app-lista-cripto]',
@@ -8,16 +9,12 @@ import { ICripto } from 'src/app/interfaces/i-cripto';
 })
 export class ListaCriptoComponent implements OnInit {
 
-  @Input() cripto!: ICripto;
+  @Input() cripto!: IInfoCripto;
   @Output() positionMarcar = new EventEmitter<ICripto>();
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  marcarPosicion(crypto: ICripto) {
-    this.positionMarcar.emit(crypto);
   }
 
 }

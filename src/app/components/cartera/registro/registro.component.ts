@@ -19,7 +19,7 @@ export class RegistroComponent implements OnInit {
   constructor(public fb: FormBuilder, private authService: AuthService) {
     this.formularioAlta = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.required, Validators.minLength(5)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(5)]),
     })
   }
 
@@ -30,6 +30,7 @@ export class RegistroComponent implements OnInit {
     console.log(this.usuario);
     const {email,password} = this.usuario;
     this.authService.register(email,password).then(res => {
+      alert("Se ha registrado!!!");
       console.log("se registró: " + res);
     })
   }

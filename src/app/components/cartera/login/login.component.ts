@@ -23,23 +23,33 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.usuario);
     const {email,password} = this.usuario;
-    this.authService.login(email,password).then(res => {
-      localStorage.setItem("token", res!.user!.uid);
-      console.log("se loggeó: " + res?.user?.uid);
-      this.router.navigate(["dashboard"]);
-    })
+    this.authService.login(email, password);
+
+    // console.log(this.usuario);
+    // const {email,password} = this.usuario;
+    // this.authService.login(email,password).then(res => {
+    //   //localStorage.setItem("token", res!.user!.refreshToken);
+    //   //localStorage.setItem("uid", res!.user!.uid);
+    //   //console.log("se loggeó: " + res?.user?.uid);
+    //   //this.router.navigate(["dashboard"]);
+    // })
   }
 
   loginConGoogle() {
-    console.log(this.usuario);
-    const {email,password} = this.usuario;
-    this.authService.loginWithGoogle(email,password).then(res => {
-      localStorage.setItem("token", res!.user!.uid);
-      console.log("se loggeó con google: " + res?.user?.uid);
-      this.router.navigate(["dashboard"]);
-    })
+    this.authService.loginWithGoogle();
+
+    // this.authService.loginWithGoogle(email,password).then(res => {
+
+    //   //console.log(res!.credential!.idToken);
+
+    //   console.log(res);
+
+    //   localStorage.setItem("token", res!.user!.refreshToken);
+    //   localStorage.setItem("uid", res!.user!.uid);
+    //   console.log("se loggeó con google: " + res?.user?.uid);
+    //   this.router.navigate(["dashboard"]);
+    // })
   }
 
   logout() {

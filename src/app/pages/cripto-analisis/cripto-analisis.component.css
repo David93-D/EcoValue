@@ -1,0 +1,45 @@
+.fondo {
+    background-color: #2874A6;
+}
+
+.titulo-analisis {
+    font-size: 3em;
+    color: #b4975a;
+    font-family: Georgia, serif;
+    text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+.texto-buscador {
+    color: white;
+}
+
+.lupa {
+    background-color: #b4975a;
+}
+
+.letra-ecovalue {
+    color: #b4975a; 
+    font-family: Georgia, serif; 
+    font-weight: bold;
+}
+
+.fondo-tabla {
+    background-color: rgb(73, 89, 213);
+}
+
+.azul {
+    background-color: #1c2d8c;
+}
+
+.yellow {
+    background-color: #2639C6;
+}
+
+.paginacion {
+    color: white;
+}
+
+.paginacion:hover {
+    background-color: #3f51b5;
+    border: 1px solid #b4975a;
+}
