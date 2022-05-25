@@ -19,7 +19,10 @@ export class BlogComponent implements OnInit {
 
   mostrarArticulos() {
     this.firebase.getAllArticulos().subscribe((response) => {
-      this.llistarArticulos = response;
+      this.llistarArticulos = Object.entries(response).map(a => {
+        a[1]['id'] = a[0];        
+        return a[1];
+      });
     })
   }
 

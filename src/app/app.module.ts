@@ -69,6 +69,9 @@ import { RentabilidadesCarteraComponent } from './components/cartera/rentabilida
 import { AuthService } from './services/auth.service';
 import { VerificarCuentaComponent } from './components/cartera/verificar-cuenta/verificar-cuenta.component';
 import { ShowArticuloComponent } from './components/home/show-articulo/show-articulo.component';
+import { PanelAdminComponent } from './components/home/panel-admin/panel-admin.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ResourcesComponent } from './pages/resources/resources.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +103,10 @@ import { ShowArticuloComponent } from './components/home/show-articulo/show-arti
     PrecioCriptoComponent,
     RentabilidadesCarteraComponent,
     VerificarCuentaComponent,
-    ShowArticuloComponent
+    ShowArticuloComponent,
+    PanelAdminComponent,
+    AboutComponent,
+    ResourcesComponent
   ],
   imports: [
     BrowserModule,

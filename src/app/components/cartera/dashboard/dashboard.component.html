@@ -1,4 +1,4 @@
-<div class="container-fluid h-100">
+<div class="container-fluid">
     <div class="row m-1 justify-content-around align-items-center" style="background-color: #E5E7E9; border: 0.5px solid black; border-radius: 10px; box-shadow: 3px 3px 3px 3px #999;">
         <div class="col-lg-6 text-center">
             <h2 class="letra-ecovalue" *ngIf="userName != null">{{userName}}</h2>
@@ -67,10 +67,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr
                             app-rentabilidades-cartera
                             [rentPos]="rentPos"
                             *ngFor="let rentPos of listaRent"
+                        >
                         </tr>
                     </tbody>
                 </table>

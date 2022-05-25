@@ -1,9 +1,9 @@
-<div class="container-fluid fondo h-100">
-  <div class="row align-items-center">
+<div class="container-fluid fondo">
+  <div class="row align-items-center p-3">
     <h1 class="titulo-analisis">Blog</h1>
   </div>
   <div class="row align-items-center">
-    <div class="col-lg-4 col-md-6 col-12 mt-1 mb-1" *ngFor="let art of llistarArticulos">
+    <div class="col-lg-3 col-md-6 col-12 mt-1 mb-1" *ngFor="let art of llistarArticulos">
       <mat-card>
         <img mat-card-image [src]="art.Imagen" height="260" alt="Imagen Artículo">
         <mat-card-content class="content-centro">
@@ -12,7 +12,7 @@
           </mat-card-title-group>
         </mat-card-content>
         <mat-card-actions class="content-centro">
-          <button mat-raised-button color="primary" style="width: 60%;" [routerLink]="['/articulo', art.id]">Leer más</button>
+          <button mat-raised-button color="primary" style="width: 60%;" [routerLink]="['/show-articulo', art.id]">Leer más</button>
         </mat-card-actions>
       </mat-card>
     </div>

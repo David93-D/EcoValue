@@ -25,7 +25,7 @@ export class DialogOperacionesComponent implements OnInit {
   posicionVender: string = "";
   existe = false;
 
-  listaPosiciones:IPosicion[] = [];
+  posicionesLista:IPosicion[] = [];
 
   valoresOp: IInfoValor[] = [];
 
@@ -38,7 +38,7 @@ export class DialogOperacionesComponent implements OnInit {
 
   ngOnInit(): void {    
     this.dataValores.opVal.subscribe( v => this.valoresOp = v );
-    this.mostrarPosiciones();
+    this.getPosicionesCartera();
   }
 
   ngAfterViewInit() {
@@ -54,10 +54,10 @@ export class DialogOperacionesComponent implements OnInit {
     .subscribe(() => this.buscarOpciones());
   }
 
-  mostrarPosiciones() {
-    this.firebase.getPosiciones().subscribe((response: any) => {
+  getPosicionesCartera() {
+    this.firebase.getPosicionesCartera().subscribe((response: any) => {
       const data = Object.entries(response);
-      this.listaPosiciones = data.map((e: any) => {
+      this.posicionesLista = data.map((e: any) => {
         return e[1];
       })
     });
@@ -69,14 +69,14 @@ export class DialogOperacionesComponent implements OnInit {
 
   getValorSel(tickervalor: string, nombrevalor: string) {
     this.tickerValorEleg = tickervalor;
-    this.nombreValorEleg = nombrevalor;
+    this.nombreValorEleg = nombrevalor.replace('.', '');
     this.getPrecio();
-    this.getTotalOp();
   }
 
   getPrecio() {
     this.dataValores.getPrecioValor(this.tickerValorEleg).subscribe((response : any) => {
       this.precioValor = response;
+      this.getComision();
     });
   }
 
@@ -94,15 +94,15 @@ export class DialogOperacionesComponent implements OnInit {
   getEliminar(pos: string) {
     this.posicionVender = pos;
     // ELIMINAMOS DE LA BASE DE DATOS
-    this.firebase.ventaPosicion(this.posicionVender).subscribe();
+    this.firebase.ventaPosicion(this.posicionVender);
     // ELIMINAMOS DE LA VISTA
     let eliminar: number = 0;
-    this.listaPosiciones.forEach(element => {
+    this.posicionesLista.forEach(element => {
       if (element.ticker === pos) {
-        eliminar = this.listaPosiciones.indexOf(element);
+        eliminar = this.posicionesLista.indexOf(element);
       }
     });
-    this.listaPosiciones.splice(eliminar, 1);
+    this.posicionesLista.splice(eliminar, 1);
   }
 
 
@@ -113,7 +113,7 @@ export class DialogOperacionesComponent implements OnInit {
       switch (this.tipoOperacion) {
         case "Compra":
           //DEBEMOS PRIMERO COMPROBAR SI LA POSICIÓN YA EXISTE
-          this.listaPosiciones.forEach(element => {       
+          this.posicionesLista.forEach(element => {       
             if (element.ticker == this.tickerValorEleg) {
               this.existe = true;
             }
@@ -160,7 +160,7 @@ export class DialogOperacionesComponent implements OnInit {
 
         case "Venta":
             // DEBEMOS PRIMERO COMPROBAR SI LA POSICIÓN EXISTE
-            this.listaPosiciones.forEach(element => {
+            this.posicionesLista.forEach(element => {
               if (element.ticker == this.tickerValorEleg)
                 this.existe = true;
             });
@@ -205,7 +205,6 @@ export class DialogOperacionesComponent implements OnInit {
                   alert("El número de valores a vender es superior al que tiene!");
                 }
               });
-
             } else {
               alert("No el valor indicado no existe.")
             }

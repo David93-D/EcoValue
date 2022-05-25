@@ -1,0 +1,31 @@
+.cont-about {
+    background-image: url('../../../assets/paisaje.jpg');
+    background-size: cover;
+}
+
+.caja {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-family: 'Century Gothic', sans-serif;
+}
+
+.imgPerfil {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+}
+
+.caja h1 {
+    font-size: 40px;
+    letter-spacing: 4px;
+    font-weight: 100;
+}
+
+.caja h5 {
+    font-size: 20px;
+    letter-spacing: 3px;
+}
+
+.caja p {
+    text-align: justify;
+}

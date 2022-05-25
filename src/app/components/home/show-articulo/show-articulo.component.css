@@ -1,0 +1,10 @@
+.fondo {
+    background-color: #2874A6;
+}
+
+.titulo-articulo {
+    font-size: 3em;
+    color: #b4975a; 
+    font-family: Georgia, serif;
+    /* text-shadow: 0.1em 0.1em 0.2em black; */
+}

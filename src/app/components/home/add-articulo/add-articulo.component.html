@@ -1,1 +1,18 @@
-<p>add-articulo works!</p>
+<form class="m-1" [formGroup]="newArticuloForm" (ngSubmit)="altaArticulo()">
+    <legend class="leyenda-add mt-1">Dar de Alta nuevo Artículo</legend>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="tituloArt">Título del Artículo</span>
+        <input type="text" class="form-control" formControlName="tituloArt">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text">Cuerpo del Artículo</span>
+        <textarea class="form-control" formControlName="cuerpoArt"></textarea>
+    </div>
+    <div class="input-group mb-3">
+        <input type="file" accept=".png, .jpg, .jpeg" class="form-control" (change)="cargarImagen($event)" id="imagenArt">
+    </div>
+    <div class="input-group justify-content-end mb-1">
+        <button class="btn btn-danger" type="reset">Borrar datos</button>
+        <button mat-button class="btn btn-warning" type="submit">Alta Artículo</button>
+    </div>
+</form>

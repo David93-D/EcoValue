@@ -13,16 +13,7 @@ export class FirebaseService {
 
   posicionesSubject = new Subject<IPosicion[]>();
 
-  articulosSubject = new Subject<IArticulo[]>();// OBSERVABLE CON SUBJECT
-
-  //CONFIGURACIÓN DE FIREBASE
-  // firebaseConfig = {
-  //   apiKey: environment.firebaseConfig.apiKey,
-  //   authDomain: environment.firebaseConfig.authDomain,
-  //   databaseUrl: environment.firebaseConfig.url,
-  // };
-
-  //app = initializeApp(this.firebaseConfig);
+  articulosSubject = new Subject<IArticulo[]>();
 
   constructor(private http: HttpClient) { }
   
@@ -32,7 +23,11 @@ export class FirebaseService {
     return this.posicionesSubject;
   }
 
-  comprarPosicion(valorSeleccionado: any , operacionCompra: any) {
+  getPosicionesCartera() {
+    return this.http.get<IPosicion[]>(this.urlFireDB + `${localStorage.getItem("uid")}.json?auth=` + localStorage.getItem("token"));
+  }
+
+  comprarPosicion(valorSeleccionado: any , operacionCompra: any) {    
     this.http.put(this.urlFireDB + `${localStorage.getItem("uid")}/${valorSeleccionado}.json?auth=` + localStorage.getItem("token"), JSON.stringify(operacionCompra))
     .pipe(mergeMap(() => this.getPosiciones())).subscribe(() => {});
   }
@@ -42,7 +37,8 @@ export class FirebaseService {
   }
 
   ventaPosicion(posicionVender: string) {
-    return this.http.delete(this.urlFireDB + `/${localStorage.getItem("uid")}/${posicionVender}.json?auth=` + localStorage.getItem("token"));
+    return this.http.delete(this.urlFireDB + `/${localStorage.getItem("uid")}/${posicionVender}.json?auth=` + localStorage.getItem("token"))
+    .pipe(mergeMap(() => this.getPosiciones())).subscribe(() => {});
   }
 
   getAllArticulos() {
@@ -50,8 +46,24 @@ export class FirebaseService {
     this.http.get<IArticulo[]>(url + `.json`).subscribe(articulos => {
       this.articulosSubject.next(articulos)
     });
-
     return this.articulosSubject;
+  }
+
+  getArticulo(id:number) {
+    const url = `https://proyectoangular-1d854-default-rtdb.firebaseio.com/articulos`;
+    return this.http.get<IArticulo>(`${url}/${id}.json`);
+  }
+
+  addArticulo(articuloCreado: any) {
+    const url = `https://proyectoangular-1d854-default-rtdb.firebaseio.com/articulos`;
+    this.http.post(url + `.json?auth=` + localStorage.getItem("token"), JSON.stringify(articuloCreado))
+    .pipe(mergeMap(() => this.getAllArticulos())).subscribe(() => {});
+  }
+
+  delArticulo(id: string) {
+    const url = `https://proyectoangular-1d854-default-rtdb.firebaseio.com/articulos`;
+    return this.http.delete(url + `/${id}` + `.json?auth=` + localStorage.getItem("token"))
+    .pipe(mergeMap(() => this.getAllArticulos())).subscribe(() => {});
   }
 
 }

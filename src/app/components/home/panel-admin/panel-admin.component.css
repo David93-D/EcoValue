@@ -1,0 +1,21 @@
+.fondo {
+    background-color: #2874A6;
+}
+
+.titulo-analisis {
+    font-size: 3em;
+    color: #b4975a; 
+    font-family: Georgia, serif;
+    text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+.cont-add {
+    background-color: rgb(17, 142, 121); 
+    border: 2px dotted black; 
+    border-radius: 10px;
+}
+
+.leyenda-add {
+    font-weight: bold; 
+    color: #050d42;
+}

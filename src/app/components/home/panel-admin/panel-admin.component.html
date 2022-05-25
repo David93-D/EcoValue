@@ -1,0 +1,28 @@
+<div class="container-fluid fondo">
+    <div class="row pt-3 text-center justify-content-around">
+        <div class="col">
+            <h1 class="titulo-analisis">Panel Admin.</h1>
+        </div>
+        <div class="col">
+            <button mat-button class="bg-warning m-1" (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                logout
+            </button>
+        </div>
+    </div>
+    <div>
+        <div class="row justify-content-around">
+            <div class="m-2 col-lg-4 col-md-5 col-11 cont-add">
+                <app-add-articulo></app-add-articulo>
+            </div>
+        </div>
+        <div class="row justify-content-around">
+            <div class="m-2 col-lg-5 col-md-5 col-11">
+                <h1 class="leyenda-add">Articulos en base de datos</h1>
+                <ul class="list-group">
+                    <li class="list-group-item text-center" *ngFor="let art of llistaArt">{{art.id}} - {{art.Titulo}} <button class="btn btn-danger" (click)="borrarArt(art.id, art.Imagen)">Borrar</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

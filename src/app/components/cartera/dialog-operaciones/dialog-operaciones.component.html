@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label for="precio_valor">Precio por accion:</label>
-                        <input type="number" class="form-control" name="precioValor" [value]="precioValor" (change)="getTotalOp()" [(ngModel)]="precioValor" readonly>
+                        <input type="number" class="form-control" name="precioValor" (change)="getTotalOp()" [(ngModel)]="precioValor" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -51,7 +51,8 @@
         <div class="row text-center mb-1" *ngIf="valoresOp">
             <ul class="list-group" *ngFor="let val of valoresOp">
                 <li class="list-group-item">{{val.ticker}} - {{val.name}} - 
-                <button class="btn btn-warning" (click)="getValorSel(val.ticker, val.name)">Seleccionar</button></li>
+                    <button class="btn btn-warning" (click)="getValorSel(val.ticker, val.name)">Seleccionar</button>
+                </li>
             </ul>
         </div>
         <div class="row justify-content-around text-center">

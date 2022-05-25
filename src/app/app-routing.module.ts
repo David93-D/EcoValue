@@ -11,9 +11,13 @@ import { DashboardComponent } from './components/cartera/dashboard/dashboard.com
 import { LoginComponent } from './components/cartera/login/login.component';
 import { RegistroComponent } from './components/cartera/registro/registro.component';
 import { VerificarCuentaComponent } from './components/cartera/verificar-cuenta/verificar-cuenta.component';
+import { PanelAdminComponent } from './components/home/panel-admin/panel-admin.component';
+import { ShowArticuloComponent } from './components/home/show-articulo/show-articulo.component';
+import { AboutComponent } from './pages/about/about.component';
 import { CarteraComponent } from './pages/cartera/cartera.component';
 import { CriptoAnalisisComponent } from './pages/cripto-analisis/cripto-analisis.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ResourcesComponent } from './pages/resources/resources.component';
 import { ValoresAnalisisComponent } from './pages/valores-analisis/valores-analisis.component';
 
 const routes: Routes = [
@@ -33,6 +37,10 @@ const routes: Routes = [
   {path: 'registro', component: RegistroComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'verificar-cuenta', component: VerificarCuentaComponent},
+  {path: 'show-articulo/:id', component: ShowArticuloComponent},
+  {path: 'panel-admin', component: PanelAdminComponent},
+  {path: 'about', component: AboutComponent},
+  {path: 'resources', component: ResourcesComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 

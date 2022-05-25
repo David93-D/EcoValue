@@ -1,1 +1,3 @@
-<p>rentabilidades-cartera works!</p>
+<td>{{rentPos?.nombre}}</td>
+<td [ngStyle]="{'color': rentPos!.beneficioDinero > 0 ? 'green' : 'red' }">{{rentPos?.beneficioDinero | number:'1.2-2' }}</td>
+<td [ngStyle]="{'color': rentPos!.beneficioDinero > 0 ? 'green' : 'red' }">{{rentPos?.beneficioPorcent | number:'1.2-2' }}</td>
