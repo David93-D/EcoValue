@@ -9,7 +9,27 @@
     text-shadow: 0.1em 0.1em 0.2em black;
 }
 
+.subtitulo-home {
+    color: #b4975a;
+    text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+.frase-home {
+    color: #b4975a; 
+    font-family: Georgia, serif;
+    text-shadow: 0.1em 0.1em 0.2em black;
+}
+
 .content-centro {
     display: flex; 
     justify-content: center;
+}
+
+.paginacion {
+    color: white;
+}
+
+.paginacion:hover {
+    background-color: #3f51b5;
+    border: 1px solid #b4975a;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { mergeMap, Subject } from 'rxjs';
+import { BehaviorSubject, mergeMap, Subject } from 'rxjs';
 import { IPosicion } from '../interfaces/i-posicion';
 import { HttpClient } from '@angular/common/http';
 import { IArticulo } from '../interfaces/i-articulo';
@@ -14,6 +14,8 @@ export class FirebaseService {
   posicionesSubject = new Subject<IPosicion[]>();
 
   articulosSubject = new Subject<IArticulo[]>();
+
+  atEnd = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) { }
   
@@ -41,6 +43,24 @@ export class FirebaseService {
     .pipe(mergeMap(() => this.getPosiciones())).subscribe(() => {});
   }
 
+  getOrdenArticulos(num: number) {
+    const url = `https://proyectoangular-1d854-default-rtdb.firebaseio.com/articulos.json?shallow=true`;
+    this.http.get<any>(url).subscribe(a => {
+      let k = Object.keys(a);
+      k.sort();
+      let primerArt = k[0 + num];
+      let ultimoArt = k[7 + num];
+      const urlArt = `https://proyectoangular-1d854-default-rtdb.firebaseio.com/articulos.json?orderBy="$key"&startAt="${primerArt}"&endAt="${ultimoArt}"`;
+      
+      this.atEnd.next( k.length <= num + 8);
+      
+      this.http.get<IArticulo[]>(urlArt).subscribe(articulos => {
+        this.articulosSubject.next(articulos)
+      });
+    });
+    return this.articulosSubject;
+  }
+
   getAllArticulos() {
     const url = `https://proyectoangular-1d854-default-rtdb.firebaseio.com/articulos`;
     this.http.get<IArticulo[]>(url + `.json`).subscribe(articulos => {
@@ -56,7 +76,7 @@ export class FirebaseService {
 
   addArticulo(articuloCreado: any) {
     const url = `https://proyectoangular-1d854-default-rtdb.firebaseio.com/articulos`;
-    this.http.post(url + `.json?auth=` + localStorage.getItem("token"), JSON.stringify(articuloCreado))
+    this.http.put(url + "/" + Date.now() + `.json?auth=` + localStorage.getItem("token"), JSON.stringify(articuloCreado))
     .pipe(mergeMap(() => this.getAllArticulos())).subscribe(() => {});
   }
 

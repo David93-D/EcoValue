@@ -1,11 +1,25 @@
 <div class="container-fluid fondo">
-  <div class="row align-items-center p-3">
-    <h1 class="titulo-analisis">Blog</h1>
+  <div class="row justify-content-around p-3">
+    <div class="col-md-6 col-12">
+      <h1 class="titulo-analisis">Blog EcoValue</h1>
+    </div>
+    <div class="col-md-6 col-12 subtitulo-home">
+      <h2>Sumérjase en nuestros artículos para aumentar su conocimiento en inversiones</h2>
+    </div>
   </div>
+  <div class="h2 row text-center frase-home" style="font-style: italic;">
+    <p>"En toda mi vida, no he conocido gente sabia que no leyera todo el tiempo" - Charlie Munger</p>
+  </div>
+  <div class="row justify-content-lg-start">
+    <div class="m-1">
+        <button class="btn paginacion" (click)="botonAtras()"><mat-icon class="icono">arrow_back</mat-icon>Anterior</button>
+        <button class="btn paginacion" (click)="botonSiguiente()" *ngIf="!atEnd">Siguiente<mat-icon class="icono">arrow_forward</mat-icon></button>
+    </div>
+</div>
   <div class="row align-items-center">
     <div class="col-lg-3 col-md-6 col-12 mt-1 mb-1" *ngFor="let art of llistarArticulos">
       <mat-card>
-        <img mat-card-image [src]="art.Imagen" height="260" alt="Imagen Artículo">
+        <img mat-card-image [src]="art.Imagen" width="200" height="260" alt="Imagen Artículo">
         <mat-card-content class="content-centro">
           <mat-card-title-group>
             <mat-card-title>{{art.Titulo}}</mat-card-title>

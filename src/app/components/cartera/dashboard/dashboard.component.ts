@@ -56,12 +56,12 @@ export class DashboardComponent implements OnInit {
   mostrarPosiciones() {
     this.firebase.getPosiciones().subscribe((response: any) => {
       const data = Object.entries(response);
-      this.listaPosiciones = data.map((e: any) => {
-        this.datos_grafico_cartera.push(e[1].Total);
-        this.labelsGrafico.push(e[0]);
-        this.totalInvertidoCartera += e[1].Total;
-        return e[1];
-      });
+      this.listaPosiciones = data.map((e: any) => e[1]);
+      this.datos_grafico_cartera =  data.map((e: any) => e[1].Total );
+      this.grafico_cartera.data.datasets[0].data =  this.datos_grafico_cartera;
+      this.labelsGrafico =  data.map((e: any) => e[0] );
+      this.grafico_cartera.data.labels = this.labelsGrafico;
+      this.totalInvertidoCartera = data.reduce((acumulado: number,actual: any)=> acumulado + actual[1].Total,0);
       this.getPreciosActuales();
       this.grafico_cartera.update();
     });
