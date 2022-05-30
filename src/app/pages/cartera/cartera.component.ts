@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-cartera',
@@ -10,6 +11,7 @@ export class CarteraComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

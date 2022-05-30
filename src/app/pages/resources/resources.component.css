@@ -19,3 +19,20 @@
 .negrita {
     font-weight: bold;
 }
+
+.explicacion-recurso {
+    background-color: #71AEBC; 
+    border-radius: 18px; 
+    font-style: italic; 
+    font-weight: 400;
+}
+
+.card-recurso {
+    width: 18rem; 
+    background-color: #478CDA;
+    box-shadow: 6px 10px 20px black;
+}
+
+.boton-recurso {
+    background-color: #EFA43F;
+}

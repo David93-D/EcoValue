@@ -14,11 +14,9 @@ export class AuthService {
   userData: any;
 
   constructor(
-    private afs: AngularFirestore,
     private afauth: AngularFireAuth,
     private router: Router,
     private ngZone: NgZone,
-    private firebase: FirebaseService, 
     ) {}
 
   async register(email: string, password: string) {
@@ -33,21 +31,7 @@ export class AuthService {
             console.log(s);
             localStorage.setItem("token", s);
           });
-
-
-
           this.SendVerificationMail();
-
-          // let posicionFalsa = {
-          //   nombre: 0,
-          //   cantidad: 0,
-          //   precioMedio: 0,
-          //   ticker: "",
-          //   Total: 0
-          // }
-
-          // this.firebase.comprarPosicion("Pos", posicionFalsa);
-
         })
         .catch((error) => {
           window.alert(error.message);
@@ -58,7 +42,6 @@ export class AuthService {
     }
   }
 
-  // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afauth.currentUser
       .then((u: any) => u.sendEmailVerification())
@@ -67,7 +50,6 @@ export class AuthService {
       });
   }
 
-  // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     return user !== null && user.emailVerified !== false ? true : false;
@@ -120,7 +102,6 @@ export class AuthService {
       });
 
   }
-
 
   logout() {
     return this.afauth.signOut().then(() => {

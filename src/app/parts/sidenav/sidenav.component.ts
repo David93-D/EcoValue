@@ -13,8 +13,8 @@ export class SidenavComponent implements OnInit {
   fillerNav = [
     {name:"Home", route:"home", icon:"home"},
     {name:"Análisis de Valores", route:"analisis-valor", icon:"analytics"},
-    {name:"Cartera", route:"cartera", icon:"account_balance"},
     {name:"Análisis Cripto", route:"cripto-analisis", icon:"currency_bitcoin"},
+    {name:"Cartera", route:"cartera", icon:"account_balance"},
     {name:"Recursos", route:"resources", icon:"book"},
     {name:"Sobre EcoValue", route:"about", icon:"contact_mail"}
   ]

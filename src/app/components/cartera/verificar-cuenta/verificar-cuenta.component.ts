@@ -20,5 +20,4 @@ export class VerificarCuentaComponent implements OnInit {
     this.authService.SendVerificationMail();
   }
 
-
 }

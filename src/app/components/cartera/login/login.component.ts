@@ -9,6 +9,17 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
+  frasesInversion = [
+    '"No es necesario hacer cosas extraordinarias para conseguir resultados extraordinarios" - Warren Buffet',
+    '"Si no estás dispuesto a poseer una acción durante diez años, ni siquiera pienses en poseerla diez minutos" - Warren Buffet',
+    '"Sea temeroso cuando los demás sean codiciosos y sea codicioso cuando los demas sean temerosos - Warren Buffett',
+    '"Nunca inviertas en una idea que no puedas ilustrar con un lápiz" - Peter Lynch',
+    '"La gente no tiene paciencia para enriquecerse lentamente, por eso decide arruinarse rápidamente - Peter Lynch'
+  ];
+
+  fraseMostrar: string = "";
+
+
   usuario = {
     email: '',
     password: '',
@@ -20,36 +31,16 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.alternarFrase();
   }
 
   login() {
     const {email,password} = this.usuario;
     this.authService.login(email, password);
-
-    // console.log(this.usuario);
-    // const {email,password} = this.usuario;
-    // this.authService.login(email,password).then(res => {
-    //   //localStorage.setItem("token", res!.user!.refreshToken);
-    //   //localStorage.setItem("uid", res!.user!.uid);
-    //   //console.log("se loggeó: " + res?.user?.uid);
-    //   //this.router.navigate(["dashboard"]);
-    // })
   }
 
   loginConGoogle() {
     this.authService.loginWithGoogle();
-
-    // this.authService.loginWithGoogle(email,password).then(res => {
-
-    //   //console.log(res!.credential!.idToken);
-
-    //   console.log(res);
-
-    //   localStorage.setItem("token", res!.user!.refreshToken);
-    //   localStorage.setItem("uid", res!.user!.uid);
-    //   console.log("se loggeó con google: " + res?.user?.uid);
-    //   this.router.navigate(["dashboard"]);
-    // })
   }
 
   logout() {
@@ -58,6 +49,15 @@ export class LoginComponent implements OnInit {
 
   irRegistro() {
     this.router.navigate(["registro"]);
+  }
+
+  alternarFrase() {
+    let indice = Math.floor(Math.random() * this.frasesInversion.length);
+    if (indice == this.frasesInversion.length) indice = 0;
+    this.fraseMostrar = this.frasesInversion[indice];
+    setTimeout(() => {
+      this.alternarFrase();
+    }, 5000);
   }
 
 }

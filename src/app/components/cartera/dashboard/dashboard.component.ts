@@ -8,6 +8,7 @@ import { DialogOperacionesComponent } from '../dialog-operaciones/dialog-operaci
 import { Chart, registerables } from 'chart.js';
 import { DataValoresService } from 'src/app/services/data-valores.service';
 import { IRentPos } from 'src/app/interfaces/i-rent-pos';
+import { deleteUser, getAuth } from '@firebase/auth';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +27,8 @@ export class DashboardComponent implements OnInit {
 
   totalInvertidoCartera: number = 0;
 
+  benefDTotal: number = 0;
+
   datos_grafico_cartera: number[] = [];
 
   listaRent: IRentPos[] = [];
@@ -39,7 +42,6 @@ export class DashboardComponent implements OnInit {
   apartado = true;
 
   constructor(
-    private router: Router, 
     private dataValores: DataValoresService,
     private authService: AuthService, 
     private firebase: FirebaseService, 
@@ -59,7 +61,7 @@ export class DashboardComponent implements OnInit {
       this.listaPosiciones = data.map((e: any) => e[1]);
       this.datos_grafico_cartera =  data.map((e: any) => e[1].Total );
       this.grafico_cartera.data.datasets[0].data =  this.datos_grafico_cartera;
-      this.labelsGrafico =  data.map((e: any) => e[0] );
+      this.labelsGrafico = data.map((e: any) => e[0] );
       this.grafico_cartera.data.labels = this.labelsGrafico;
       this.totalInvertidoCartera = data.reduce((acumulado: number,actual: any)=> acumulado + actual[1].Total,0);
       this.getPreciosActuales();
@@ -69,10 +71,14 @@ export class DashboardComponent implements OnInit {
 
   getPreciosActuales() {
     this.dataValores.preciosActualizados().subscribe( response => {
+      console.log(response);
+      
       this.listaRent = this.listaPosiciones.map(p => {
         let valorBuscado = response.filter((v: any) => v.T == p.ticker);
         let benfD = ((p.cantidad * valorBuscado[0].c) - p.Total);
         let benefP = (((p.cantidad * valorBuscado[0].c) - p.Total) / p.Total) * 100;
+        this.benefDTotal += benfD;
+        
         let obj = {
           nombre: p.nombre,
           beneficioDinero: benfD,
@@ -119,6 +125,22 @@ export class DashboardComponent implements OnInit {
     })
   }
     
+  eliminarCuenta() {
+    let opcion = confirm("¿Esta seguro de querer eliminar su cuenta?");
+    if (opcion == true) {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      
+      deleteUser(user!).then(() => {
+        console.log("Usuario eliminado");
+      }).catch((error) => {
+        console.log(error);
+      });
+  
+      alert("Su cuenta ha sido eliminada correctamente.");
+      this.logout();
+	  }
+  }
 
   logout() {
     this.authService.logout();

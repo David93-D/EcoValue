@@ -1,12 +1,12 @@
-<form class="m-1" [formGroup]="newArticuloForm" (ngSubmit)="altaArticulo()">
-    <legend class="leyenda-add mt-1">Dar de Alta nuevo Artículo</legend>
+<form class="m-3" [formGroup]="newArticuloForm" (ngSubmit)="altaArticulo()">
+    <legend class="leyenda-add mt-1">Alta nuevo Artículo</legend>
     <div class="input-group mb-3">
         <span class="input-group-text" id="tituloArt">Título del Artículo</span>
-        <input type="text" class="form-control" formControlName="tituloArt">
+        <input type="text" class="form-control" formControlName="tituloArt" minlength="3">
     </div>
     <div class="input-group mb-3">
         <span class="input-group-text">Cuerpo del Artículo</span>
-        <textarea class="form-control" formControlName="cuerpoArt"></textarea>
+        <textarea class="form-control" formControlName="cuerpoArt" minlength="5"></textarea>
     </div>
     <div class="input-group mb-3">
         <input type="file" accept=".png, .jpg, .jpeg" class="form-control" (change)="cargarImagen($event)" id="imagenArt">

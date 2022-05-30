@@ -1,5 +1,5 @@
 .cont-about {
-    background-image: url('../../../assets/paisaje.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../../assets/paisaje.jpg');
     background-size: cover;
 }
 
@@ -7,6 +7,11 @@
     background-color: rgba(0, 0, 0, 0.4);
     color: white;
     font-family: 'Century Gothic', sans-serif;
+}
+
+.caja-mini {
+    background-color: rgba(45, 226, 214, 0.227);
+    border-radius: 10px;
 }
 
 .imgPerfil {

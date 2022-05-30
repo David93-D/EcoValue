@@ -7,3 +7,9 @@
     font-family: Georgia, serif; 
     font-weight: bold;
 }
+
+.distribucion-dash {
+    background-color: #FEF9E7;
+    border-radius: 10px; 
+    box-shadow: 3px 3px 3px 3px #999;
+}

@@ -1,0 +1,14 @@
+.fondo-verificar {
+    background-image: url('../../../../assets/fondo-login.jpg'); 
+    background-size: cover;
+}
+
+.cont-verificar {
+    background-color: rgba(36, 117, 216, 0.527); 
+    border-radius: 10px;
+}
+
+.letra-verificar {
+    color: white;
+    font-size: 300;
+}

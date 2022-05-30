@@ -26,7 +26,7 @@ export class DataValoresService {
 
   getAllStocks() {
     let allStocksURL = "";
-    allStocksURL = this.arrayURL[this.arrayURL.length-1]; // OBTENEMOS LA ULTIMA POSICÍON
+    allStocksURL = this.arrayURL[this.arrayURL.length-1];
     this.http.get<any>(allStocksURL).pipe(map(datos => {
       this.arrayURL.push(datos.next_url);
       return datos.results;

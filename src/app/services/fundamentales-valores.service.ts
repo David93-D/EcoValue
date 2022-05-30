@@ -86,8 +86,10 @@ export class FundamentalesValoresService {
             dato.cash_flow_statement['CFdeuda'] = { value: dato.balance_sheet.noncurrent_liabilities.value / dato.cash_flow_statement.net_cash_flow_from_financing_activities.value }
             dato.cash_flow_statement['CFopv'] = { value: dato.cash_flow_statement.net_cash_flow_from_operating_activities.value / dato.income_statement.revenues.value };
             fund[tickerBuscar][dato.fiscal_year] = dato;
+            console.log(this.fundamentalesSubject);
+            
             this.fundamentalesSubject.next(fund);
-            this.empresaFundSubject.next(fund[tickerBuscar])
+            this.empresaFundSubject.next(fund[tickerBuscar]);
           })
         });
 
@@ -95,7 +97,6 @@ export class FundamentalesValoresService {
     else {
       this.empresaFundSubject.next(fund[tickerBuscar]);
     }
-
     return this.empresaFundSubject;
   }
 

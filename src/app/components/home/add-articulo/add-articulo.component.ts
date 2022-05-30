@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { empty } from 'rxjs';
 import { IArticulo } from 'src/app/interfaces/i-articulo';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { StorageService } from 'src/app/services/storage.service';
@@ -22,11 +23,13 @@ export class AddArticuloComponent implements OnInit {
 
   llistarArticulos: IArticulo[] = [];
 
-  constructor(private storageService: StorageService, private firebaseService: FirebaseService) { }
+  constructor(
+    private storageService: StorageService, 
+    private firebaseService: FirebaseService
+  ) { }
 
   ngOnInit(): void {
     this.mostrarArticulos();
-     
   }
 
   mostrarArticulos() {
@@ -38,8 +41,12 @@ export class AddArticuloComponent implements OnInit {
     
   }
 
-  altaArticulo() {
-    this.uploadImg(this.reader);
+  altaArticulo() {    
+    if (this.newArticuloForm.value.tituloArt != "" || this.newArticuloForm.value.cuerpoArt != "") {
+      this.uploadImg(this.reader);
+    } else {
+      alert("Rellene todos los campos para dar de alta un artículo!");
+    }
   }
 
   cargarImagen(event: any) {
@@ -49,10 +56,10 @@ export class AddArticuloComponent implements OnInit {
     this.reader.onloadend = () => {
       this.imagen = this.reader.result;
     }
-  
   }
 
   uploadImg(reader: any) {
+    
     this.storageService.subirImagen("Eco_" + Date.now(), reader.result).then(urlImagen => {
 
       let nuevoArticulo = {
@@ -61,8 +68,8 @@ export class AddArticuloComponent implements OnInit {
         Imagen: urlImagen
       }  
 
-      this.firebaseService.addArticulo(nuevoArticulo);
       alert("Nuevo articulo dado de Alta");
+      this.firebaseService.addArticulo(nuevoArticulo);
     });
   }
 
