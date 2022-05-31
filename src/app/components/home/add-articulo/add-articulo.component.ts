@@ -37,15 +37,14 @@ export class AddArticuloComponent implements OnInit {
       this.llistarArticulos = Object.values(
         response
       );
-    });
-    
+    }); 
   }
 
   altaArticulo() {    
-    if (this.newArticuloForm.value.tituloArt != "" || this.newArticuloForm.value.cuerpoArt != "") {
+    if (this.newArticuloForm.value.tituloArt != "" || this.newArticuloForm.value.cuerpoArt != "" || this.reader.readyState != 0) {
       this.uploadImg(this.reader);
     } else {
-      alert("Rellene todos los campos para dar de alta un artículo!");
+      alert("Rellene todos los campos para dar de alta un artículo");
     }
   }
 
